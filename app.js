@@ -155,8 +155,12 @@
 					loadMore.setAttribute('data-id', data.users[0]._id),
 					follows.innerHTML = template.follow_title(),
 					getFollows(data.users[0]._id),
-					!route.has('login') && (
+					!route.has('login') ? (
 						changeUrl(`?login=${data.users[0].name}`)
+					) : (
+						route.get('login') != data.users[0].name && (
+							changeUrl(`?login=${data.users[0].name}`)
+						)
 					)
 				) : (
 					footCenter.classList.add('hide'),
