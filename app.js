@@ -1,13 +1,15 @@
 (document => {
 	const CLIENTID = '4b8a59w0ops6ut6fuh7shdb1n0ohgy';
 	const route = new URLSearchParams(window.location.search);
-	const landing = document.getElementById('landing');
-	const content = document.getElementById('content');
+	const landing = document.querySelector('#landing');
+	const content = document.querySelector('#content');
+	const login_main = document.querySelector('.login_main');
+	const btn_main = document.querySelector('.btn_main');
 	const login = document.querySelector('.login');
 	const btn = document.querySelector('.btn');
-	const output = document.getElementById('app');
-	const footCenter = document.getElementById('foot_center');
-	const loadMore = document.getElementById('load_more');
+	const output = document.querySelector('#app');
+	const footCenter = document.querySelector('#foot_center');
+	const loadMore = document.querySelector('#load_more');
 	const moreText = document.querySelector('.more_text');
 	const moreLoader = document.querySelector('.more_loader');
 	const limit = 10;
@@ -218,6 +220,33 @@
 		);
 		return false;
 	};
+
+	btn_main.addEventListener('click', () => {
+		login_main.value.trim() ? (
+			getProfile(login_main.value.trim()),
+			login_main.classList.remove('error')
+		) : (
+			login_main.classList.add('error')
+		)
+	});
+
+	login_main.addEventListener('keyup', (e) => {
+		if (e.keyCode === 13) {
+			e.preventDefault();
+			login_main.value.trim() ? (
+				getProfile(login_main.value.trim()),
+				login_main.classList.remove('error')
+			) : (
+				login_main.classList.add('error')
+			)
+		}
+	});
+
+	login_main.addEventListener('input', () => {
+		login_main.value.trim() && (
+			login_main.classList.remove('error')
+		)
+	});
 
 	btn.addEventListener('click', () => {
 		login.value.trim() ? (
