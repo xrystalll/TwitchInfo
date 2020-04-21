@@ -1,5 +1,5 @@
 (document => {
-    const CLIENTID = '4b8a59w0ops6ut6fuh7shdb1n0ohgy';
+    const CLIENTID = 'ce4n64ldb15801hbrrz06vpq5dbain';
     const route = new URLSearchParams(window.location.search);
     const landing = document.querySelector('#landing');
     const content = document.querySelector('#content');
