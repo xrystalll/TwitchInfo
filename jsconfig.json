@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "sourceMap": false,
+    "module": "esnext",
+    "target": "esnext",
+    "lib": [
+      "es2017",
+      "dom",
+      "esnext"
+    ],
+    "strict": true
+  },
+  "exclude": ["node_modules"]
+}
