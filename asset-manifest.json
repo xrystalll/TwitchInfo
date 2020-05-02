@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.698d0e9d.chunk.css",
+    "main.js": "/static/js/main.de96f32c.chunk.js",
+    "main.js.map": "/static/js/main.de96f32c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.638601f2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.638601f2.js.map",
+    "static/js/2.e1ed2128.chunk.js": "/static/js/2.e1ed2128.chunk.js",
+    "static/js/2.e1ed2128.chunk.js.map": "/static/js/2.e1ed2128.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.06a39f7c40c9d6abb310884caffde544.js": "/precache-manifest.06a39f7c40c9d6abb310884caffde544.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.698d0e9d.chunk.css.map": "/static/css/main.698d0e9d.chunk.css.map",
+    "static/js/2.e1ed2128.chunk.js.LICENSE.txt": "/static/js/2.e1ed2128.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/twitch-background.a26a488a.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.638601f2.js",
+    "static/js/2.e1ed2128.chunk.js",
+    "static/css/main.698d0e9d.chunk.css",
+    "static/js/main.de96f32c.chunk.js"
+  ]
+}
