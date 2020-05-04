@@ -7,7 +7,7 @@ const Home = () => {
 
   const getUser = (e) => {
     const input = e.currentTarget.parentNode.children[0]
-    if (!input.value.length) {
+    if (!input.value.trim().length) {
       input.classList.add('error')
     } else {
       input.classList.remove('error')
@@ -18,12 +18,28 @@ const Home = () => {
   const getUserByEnter = (e) => {
     if (e.key === 'Enter') {
       const input = e.currentTarget
-      if (!input.value.length) {
+      if (!input.value.trim().length) {
         input.classList.add('error')
       } else {
         input.classList.remove('error')
         history.push('/user/' + input.value)
       }
+    }
+  }
+
+  const validateInput = (e) => {
+    const input = e.currentTarget
+    if (!input.value.trim().length) {
+      input.classList.add('error')
+    } else {
+      input.classList.remove('error')
+    }
+  }
+
+  const loseFocus = (e) => {
+    const input = e.currentTarget
+    if (input.classList.contains('error')) {
+      input.classList.remove('error')
     }
   }
 
@@ -37,7 +53,14 @@ const Home = () => {
             Enter Twitch username to get information about the date of registration, last online, list of follows and more.
           </div>
           <div className="main_form">
-            <input onKeyDown={getUserByEnter.bind(this)} className="login_main input_text" type="text" placeholder="Enter username" />
+            <input
+              onChange={validateInput.bind(this)}
+              onBlur={loseFocus.bind(this)}
+              onKeyDown={getUserByEnter.bind(this)}
+              className="login_main input_text"
+              type="text"
+              placeholder="Enter username"
+            />
             <input onClick={getUser.bind(this)} className="btn_main" type="submit" value="Check" />
           </div>
         </div>

@@ -15,6 +15,7 @@
   --default-transparent: transparent;
   --default-transparent-01: rgba(0, 0, 0, .1);
   --default-transparent-02: rgba(0, 0, 0, .2);
+  --default-transparent-06: rgba(0, 0, 0, .6);
   --default-transparent-08: rgba(0, 0, 0, .8);
   --secondary-transparent-04: rgba(173, 173, 184, .4);
 }
@@ -320,7 +321,7 @@ article.container-profile-main {
 .user-profile-content .user-head {
   width: 100%;
   overflow: hidden;
-  background: rgba(24, 24, 27, .3);
+  background: var(--default-transparent-06);
   position: relative;
   padding: 50px 0 24px;
 }
@@ -328,17 +329,15 @@ article.container-profile-main {
 .user-profile-content .user-head:before {
   content: '';
   position: absolute;
-  margin: -25px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(16px);
-  transform: scale(1.08);
+  filter: blur(2px);
+  z-index: -1;
 }
 
 .user-profile-content .user-head:after {
@@ -357,10 +356,10 @@ article.container-profile-main {
 .user-profile-content .user-head div.user-info {
   display: flex;
   padding: 32px 16px 64px;
-  z-index: 9;
   position: relative;
   align-items: center;
   justify-content: center;
+  z-index: 9;
 }
 
 .user-profile-content .user-head div.user-info .avatar {
@@ -384,16 +383,24 @@ article.container-profile-main {
 .user-profile-content .user-head div.user-info .uname {
   width: 100%;
   position: relative;
-  z-index: 9;
   margin-bottom: 5px;
+  z-index: 9;
 }
 
-.user-profile-content .user-head div.user-info .uname a {
+.user-profile-content .user-head div.user-info .uname .display_name {
   text-decoration: none;
   color: inherit;
+  display: flex;
+  align-items: center;
 }
 
-.user-profile-content .user-head div.user-info .uname a h4 {
+.user-profile-content .user-head div.user-info .uname .display_name div {
+  line-height: 0;
+  position: relative;
+  top: 2px;
+}
+
+.user-profile-content .user-head div.user-info .uname h4 {
   color: var(--default-white);
   margin: 0px !important;
   font-size: 32px;
@@ -401,6 +408,27 @@ article.container-profile-main {
   line-height: 40px;
   display: inline-block;
   float: initial !important;
+}
+
+.user-profile-content .social_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+  margin: 16px 0;
+  max-width: 170px;
+}
+
+.user-profile-content .social_info li {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  width: 50%;
+  margin-right: 32px;
+}
+
+.user-profile-content .social_count {
+  font-weight: 500;
 }
 
 .user-profile-content .social-links {
@@ -443,6 +471,15 @@ article.container-profile-main {
   .user-profile-content .user-head div.user-info .info {
     margin: 30px 0 0;
     padding: 0px 20px 10px;
+  }
+  .user-profile-content .user-head div.user-info .uname .display_name {
+    justify-content: center;
+  }
+  .user-profile-content .social_info {
+    max-width: initial;
+  }
+  .user-profile-content .social_info li {
+    margin: 0;
   }
 }
 
@@ -495,6 +532,7 @@ article.container-profile-main {
 
 .follows_list {
   margin-bottom: 20px;
+  overflow: hidden;
 }
 .follow_item {
   display: flex;
@@ -531,7 +569,7 @@ article.container-profile-main {
 }
 
 .follow_name svg, .follow_date svg, .uname svg  {
-  margin-left: 4px;
+  margin-left: 6px;
 }
 
 .follow_date {

@@ -11,6 +11,7 @@ class Channel extends Component {
       userId: 0,
       clientId: 'ce4n64ldb15801hbrrz06vpq5dbain',
       profile: [],
+      extendedInfo: [],
       follows: [],
       noProfileData: false,
       noFollowsData: false,
@@ -30,6 +31,7 @@ class Channel extends Component {
     if (prevProps.match.params.login !== this.props.match.params.login) {
       this.setState({
         profile: [],
+        extendedInfo: [],
         follows: [],
         noProfileData: false,
         noFollowsData: false,
@@ -52,12 +54,35 @@ class Channel extends Component {
       })
       const profile = await data.json()
 
-      this.setState({ profile: [profile.users[0]], userId: profile.users[0]._id })
-      this.getFollows()
+      if (profile.users.length > 0) {
+        this.setState({ extendedInfo: [profile.users[0]], userId: profile.users[0]._id })
+        this.getChannel(profile.users[0]._id)
+        this.getFollows()
+      } else {
+        this.setState({ noProfileData: true })
+      }
     } catch(e) {
       this.setState({ noProfileData: true })
       console.error(e)
     }
+  }
+
+  getChannel(id = this.state.userId) {
+    fetch('https://api.twitch.tv/kraken/channels/' + id, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/vnd.twitchtv.v5+json',
+        'Client-ID': this.state.clientId
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ profile: [data] })
+      })
+      .catch(e => {
+        this.setState({ noFollowsData: true })
+        console.error(e)
+      })
   }
 
   getFollows() {
@@ -111,6 +136,7 @@ class Channel extends Component {
   changeUser(login, e) {
     this.setState({
       profile: [],
+      extendedInfo: [],
       follows: [],
       noProfileData: false,
       noFollowsData: false,
@@ -122,12 +148,12 @@ class Channel extends Component {
   }
 
   render() {
-    const { profile, follows } = this.state
+    const { profile, extendedInfo, follows } = this.state
     return (
       <>
         {profile.length > 0 ? (
           <div>
-            <Profile data={profile} />
+            <Profile data={profile} extended={extendedInfo} />
             {follows.length > 0 ? (
               <div className="follows_list">
                 {follows.map(item => (
@@ -141,7 +167,7 @@ class Channel extends Component {
             )}
           </div>
         ) : (
-          !this.state.noProfileData ? <Loader /> : <Error message="No data" />
+          !this.state.noProfileData ? <Loader /> : <Error message="Nothing! Try another username" />
         )}
         {this.state.loadMore ? (
           <div onClick={this.loadMoreFollows.bind(this)} className="foot_center">

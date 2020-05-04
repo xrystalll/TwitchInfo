@@ -6,10 +6,11 @@ const Header = () => {
 
   const getUser = (e) => {
     const input = e.currentTarget.parentNode.children[0]
-    if (!input.value.length) {
+    if (!input.value.trim().length) {
       input.classList.add('error')
     } else {
       input.classList.remove('error')
+      input.value = ''
       history.push('/user/' + input.value)
     }
   }
@@ -17,12 +18,28 @@ const Header = () => {
   const getUserByEnter = (e) => {
     if (e.key === 'Enter') {
       const input = e.currentTarget
-      if (!input.value.length) {
+      if (!input.value.trim().length) {
         input.classList.add('error')
       } else {
         input.classList.remove('error')
         history.push('/user/' + input.value)
       }
+    }
+  }
+
+  const validateInput = (e) => {
+    const input = e.currentTarget
+    if (!input.value.trim().length) {
+      input.classList.add('error')
+    } else {
+      input.classList.remove('error')
+    }
+  }
+
+  const loseFocus = (e) => {
+    const input = e.currentTarget
+    if (input.classList.contains('error')) {
+      input.classList.remove('error')
     }
   }
 
@@ -37,7 +54,14 @@ const Header = () => {
           </svg>
         </Link>
         <div className="head_input_inner">
-          <input onKeyDown={getUserByEnter.bind(this)} className="login input_text" type="text" placeholder="Enter username" />
+          <input
+            onChange={validateInput.bind(this)}
+            onBlur={loseFocus.bind(this)}
+            onKeyDown={getUserByEnter.bind(this)}
+            className="login input_text"
+            type="text"
+            placeholder="Enter username"
+          />
           <input onClick={getUser.bind(this)} className="btn" type="submit" value="Check" />
         </div>
       </div>
