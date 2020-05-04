@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { Profile } from '../partials/Profile';
-import { FollowItem } from '../partials/FollowItem';
+import { ClipItem } from '../partials/ClipItem';
 import { Loader } from '../partials/Loader';
 import { Error } from '../partials/Error';
 
-class Channel extends Component {
+class Clips extends Component {
   constructor() {
     super();
     this.state = {
       userId: 0,
       clientId: 'ce4n64ldb15801hbrrz06vpq5dbain',
+      period: 'week',
       profile: [],
       extendedInfo: [],
-      follows: [],
+      clips: [],
       noProfileData: false,
-      noFollowsData: false,
+      noClipsData: false,
       limit: 10,
-      offset: 0,
+      cursor: '',
       loadMore: false,
       loadMoreInProgress: false
     }
@@ -32,9 +33,9 @@ class Channel extends Component {
       this.setState({
         profile: [],
         extendedInfo: [],
-        follows: [],
+        clips: [],
         noProfileData: false,
-        noFollowsData: false,
+        noClipsData: false,
         offset: 0,
         loadMore: false,
         loadMoreInProgress: false
@@ -57,7 +58,7 @@ class Channel extends Component {
       if (profile.users.length > 0) {
         this.setState({ extendedInfo: [profile.users[0]], userId: profile.users[0]._id })
         this.getChannel(profile.users[0]._id)
-        this.getFollows()
+        this.getClips()
       } else {
         this.setState({ noProfileData: true })
       }
@@ -85,8 +86,8 @@ class Channel extends Component {
       })
   }
 
-  getFollows() {
-    fetch(`https://api.twitch.tv/kraken/users/${this.state.userId}/follows/channels?limit=${this.state.limit}&offset=${this.state.offset}`, {
+  getClips(period = this.state.period) {
+    fetch(`https://api.twitch.tv/kraken/clips/top?channel=${this.props.match.params.login}&period=${period}&limit=${this.state.limit}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
@@ -95,21 +96,21 @@ class Channel extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ follows: data.follows })
-        if (data.follows.length > 0) {
+        this.setState({ clips: data.clips, cursor: data._cursor })
+        if (data.clips.length > 0) {
           this.setState({ loadMore: true })
         } else {
-          this.setState({ noFollowsData: true })
+          this.setState({ noClipsData: true })
         }
       })
       .catch(e => {
-        this.setState({ noFollowsData: true })
+        this.setState({ noClipsData: true })
         console.error(e)
       })
   }
 
-  fetchMoreFollows(userId, offset) {
-    fetch(`https://api.twitch.tv/kraken/users/${this.state.userId}/follows/channels?limit=${this.state.limit}&offset=${offset}`, {
+  fetchMoreClips(cursor) {
+    fetch(`https://api.twitch.tv/kraken/clips/top?channel=${this.props.match.params.login}&period=${this.state.period}&limit=${this.state.limit}&cursor=${cursor}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
@@ -118,65 +119,81 @@ class Channel extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        if (!data.follows.length) {
+        if (!data.clips.length) {
           this.setState({ loadMore: false, loadMoreInProgress: false })
           return
         }
 
-        this.setState({ follows: [...this.state.follows, ...data.follows], loadMoreInProgress: false })
+        this.setState({ clips: [...this.state.clips, ...data.clips], loadMoreInProgress: false, cursor: data._cursor })
       })
       .catch(e => console.error(e))
   }
 
-  loadMoreFollows() {
-    this.setState({ offset: this.state.offset + this.state.limit, loadMoreInProgress: true })
-    this.fetchMoreFollows(this.state.userId, this.state.offset + this.state.limit)
+  loadMoreClips() {
+    this.setState({ loadMoreInProgress: true })
+    this.fetchMoreClips(this.state.cursor)
   }
 
-  changeUser(login, e) {
-    this.setState({
-      profile: [],
-      extendedInfo: [],
-      follows: [],
-      noProfileData: false,
-      noFollowsData: false,
-      offset: 0,
-      loadMore: false,
-      loadMoreInProgress: false
-    })
-    this.fetchProfile(login)
+  changePreiod() {
+    switch(this.state.period) {
+      case 'day':
+        this.setState({ clips: [], period: 'week', cursor: '', loadMore: false })
+        this.getClips('week')
+        break
+      case 'week':
+        this.setState({ clips: [], period: 'month', cursor: '', loadMore: false })
+        this.getClips('month')
+        break
+      case 'month':
+        this.setState({ clips: [], period: 'all', cursor: '', loadMore: false })
+        this.getClips('all')
+        break
+      case 'all':
+        this.setState({ clips: [], period: 'day', cursor: '', loadMore: false })
+        this.getClips('day')
+        break
+      default:
+        this.setState({ clips: [], period: 'week', cursor: '', loadMore: false })
+        this.getClips('week')
+    }
   }
 
   render() {
-    const { profile, extendedInfo, follows, noProfileData, noFollowsData, loadMore } = this.state
+    const { profile, extendedInfo, clips, noProfileData, noClipsData, loadMore, period } = this.state
     return (
       <>
         {profile.length > 0 ? (
           <div>
             <Profile data={profile} extended={extendedInfo} />
-            {follows.length > 0 ? (
-              <div className="follows_list">
-                {follows.map(item => (
-                  <div key={item.channel._id} onClick={this.changeUser.bind(this, item.channel.name)}>
-                    <FollowItem data={item} />
-                  </div>
+            <div onClick={this.changePreiod.bind(this)} className="period_toggle">
+              <span>
+                Popular - {period}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px">
+                  <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" fill="#EFEFF1" />
+                </svg>
+              </span>
+            </div>
+            {clips.length > 0 ? (
+              <div className="clips_list">
+                {clips.map(item => (
+                  <ClipItem key={item.slug} data={item} />
                 ))}
               </div>
             ) : (
-              !noFollowsData ? <Loader /> : <Error message="No follows" />
+              !noClipsData ? <Loader /> : <Error message="No clips" />
             )}
           </div>
         ) : (
           !noProfileData ? <Loader /> : <Error message="Nothing! Try another username" />
         )}
         {loadMore ? (
-          <div onClick={this.loadMoreFollows.bind(this)} className="foot_center">
+          <div onClick={this.loadMoreClips.bind(this)} className="foot_center">
             <div className="load_more">
               {this.state.loadMoreInProgress ? (
                 <span className="more_loader">
                   <Loader />
                 </span>
-              ) : <span className="more_text">Load more follows</span>}
+              ) : <span className="more_text">Load more clips</span>}
             </div>
           </div>
         ) : null}
@@ -185,4 +202,4 @@ class Channel extends Component {
   }
 }
 
-export default Channel;
+export default Clips;

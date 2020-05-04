@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { timeFormat, counter } from '../support/Utils';
 
 export const Profile = (props) => {
@@ -64,7 +65,10 @@ export const Profile = (props) => {
               <span>Registration: </span>
               <b>{timeFormat(data.created_at)}</b>
             </div>
-            <div className="follows">FOLLOWED CHANNELS</div>
+            <div className="channel_nav">
+              <NavLink to={'/user/' + data.name} className="nav_item">FOLLOWED CHANNELS</NavLink>
+              <NavLink to={'/clips/' + data.name} className="nav_item">CLIPS</NavLink>
+            </div>
           </div>
         </div>
       </div>

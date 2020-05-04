@@ -34,3 +34,15 @@ export const counter = (count) => {
   if (count >= 1e6 && count < 1e9) return `${+(count / 1e6).toFixed(1)}M`
   if (count >= 1e9 && count < 1e12) return `${+(count / 1e9).toFixed(1)}B`
 }
+
+export const toHHMMSS = (sec) => {
+  const secNum = parseInt(sec, 10)
+  let hours = Math.floor(secNum / 3600)
+  const minutes = Math.floor((secNum - (hours * 3600)) / 60)
+  let seconds = secNum - (hours * 3600) - (minutes * 60)
+
+  if (hours > 0) { hours = hours + ':' }
+  if (seconds < 10) { seconds = '0' + seconds }
+
+  return hours + minutes + ':' + seconds
+}
