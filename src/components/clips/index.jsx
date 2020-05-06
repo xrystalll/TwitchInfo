@@ -120,14 +120,19 @@ class Clips extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        if (!data.clips.length) {
+        if (this.state.cursor !== '') {
+          this.setState({ clips: [...this.state.clips, ...data.clips], loadMoreInProgress: false, cursor: data._cursor })
+          if (data._cursor === '') {
+            this.setState({ loadMore: false, loadMoreInProgress: false })
+          }
+        } else {
           this.setState({ loadMore: false, loadMoreInProgress: false })
-          return
         }
-
-        this.setState({ clips: [...this.state.clips, ...data.clips], loadMoreInProgress: false, cursor: data._cursor })
       })
-      .catch(e => console.error(e))
+      .catch(e => {
+        this.setState({ loadMore: false, loadMoreInProgress: false })
+        console.error(e)
+      })
   }
 
   loadMoreClips() {
