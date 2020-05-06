@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Profile } from '../partials/Profile';
+import { StreamItem } from '../partials/StreamItem';
 import { FollowItem } from '../partials/FollowItem';
 import { Loader } from '../partials/Loader';
 import { Error } from '../partials/Error';
@@ -13,6 +15,8 @@ class Channel extends Component {
       profile: [],
       extendedInfo: [],
       follows: [],
+      stream: [],
+      live: false,
       noProfileData: false,
       noFollowsData: false,
       limit: 10,
@@ -33,6 +37,8 @@ class Channel extends Component {
         profile: [],
         extendedInfo: [],
         follows: [],
+        stream: [],
+        live: false,
         noProfileData: false,
         noFollowsData: false,
         offset: 0,
@@ -57,6 +63,7 @@ class Channel extends Component {
       if (profile.users.length > 0) {
         this.setState({ extendedInfo: [profile.users[0]], userId: profile.users[0]._id })
         this.getChannel(profile.users[0]._id)
+        this.getStream()
         this.getFollows()
       } else {
         this.setState({ noProfileData: true })
@@ -95,9 +102,8 @@ class Channel extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ follows: data.follows })
         if (data.follows.length > 0) {
-          this.setState({ loadMore: true })
+          this.setState({ follows: data.follows, loadMore: true })
         } else {
           this.setState({ noFollowsData: true })
         }
@@ -133,11 +139,35 @@ class Channel extends Component {
     this.fetchMoreFollows(this.state.userId, this.state.offset + this.state.limit)
   }
 
+  getStream() {
+    fetch('https://api.twitch.tv/kraken/streams/' + this.state.userId, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/vnd.twitchtv.v5+json',
+        'Client-ID': this.state.clientId
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.stream !== null) {
+          this.setState({ stream: data.stream, live: true })
+        } else {
+          this.setState({ live: false })
+        }
+      })
+      .catch(e => {
+        this.setState({ live: false })
+        console.error(e)
+      })
+  }
+
   changeUser(login, e) {
     this.setState({
       profile: [],
       extendedInfo: [],
       follows: [],
+      stream: [],
+      live: false,
       noProfileData: false,
       noFollowsData: false,
       offset: 0,
@@ -148,12 +178,22 @@ class Channel extends Component {
   }
 
   render() {
-    const { profile, extendedInfo, follows, noProfileData, noFollowsData, loadMore } = this.state
+    const { profile, extendedInfo, follows, stream, live, noProfileData, noFollowsData, loadMore } = this.state
     return (
       <>
         {profile.length > 0 ? (
           <div>
             <Profile data={profile} extended={extendedInfo} />
+            {live ? (
+              <div className="stream_container">
+                <div className="live_title">Live stream</div>
+                <StreamItem data={stream} />
+              </div>
+            ) : null}
+            <div className="channel_nav">
+              <NavLink to={'/user/' + profile[0].name} className="nav_item">FOLLOWED CHANNELS</NavLink>
+              <NavLink to={'/clips/' + profile[0].name} className="nav_item">CLIPS</NavLink>
+            </div>
             {follows.length > 0 ? (
               <div className="follows_list">
                 {follows.map(item => (

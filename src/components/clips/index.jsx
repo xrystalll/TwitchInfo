@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Profile } from '../partials/Profile';
 import { ClipItem } from '../partials/ClipItem';
 import { Loader } from '../partials/Loader';
 import { Error } from '../partials/Error';
+import Dropdown from 'react-dropdown';
 
 class Clips extends Component {
   constructor() {
@@ -96,9 +98,8 @@ class Clips extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ clips: data.clips, cursor: data._cursor })
         if (data.clips.length > 0) {
-          this.setState({ loadMore: true })
+          this.setState({ clips: data.clips, cursor: data._cursor, loadMore: true })
         } else {
           this.setState({ noClipsData: true })
         }
@@ -134,23 +135,23 @@ class Clips extends Component {
     this.fetchMoreClips(this.state.cursor)
   }
 
-  changePreiod() {
-    switch(this.state.period) {
+  changePreiod(e) {
+    switch(e.value) {
       case 'day':
+        this.setState({ clips: [], period: 'day', cursor: '', loadMore: false })
+        this.getClips('day')
+        break
+      case 'week':
         this.setState({ clips: [], period: 'week', cursor: '', loadMore: false })
         this.getClips('week')
         break
-      case 'week':
+      case 'month':
         this.setState({ clips: [], period: 'month', cursor: '', loadMore: false })
         this.getClips('month')
         break
-      case 'month':
+      case 'all':
         this.setState({ clips: [], period: 'all', cursor: '', loadMore: false })
         this.getClips('all')
-        break
-      case 'all':
-        this.setState({ clips: [], period: 'day', cursor: '', loadMore: false })
-        this.getClips('day')
         break
       default:
         this.setState({ clips: [], period: 'week', cursor: '', loadMore: false })
@@ -160,18 +161,29 @@ class Clips extends Component {
 
   render() {
     const { profile, extendedInfo, clips, noProfileData, noClipsData, loadMore, period } = this.state
+    const periods = [{
+      value: 'day', label: 'Popular - 24 hours'
+    }, {
+      value: 'week', label: 'Popular - 7 days'
+    }, {
+      value: 'month', label: 'Popular - 30 days'
+    }, {
+      value: 'all', label: 'Popular - all time'
+    }]
     return (
       <>
         {profile.length > 0 ? (
           <div>
             <Profile data={profile} extended={extendedInfo} />
-            <div onClick={this.changePreiod.bind(this)} className="period_toggle">
-              <span>
-                Popular - {period}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px">
-                  <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" fill="#EFEFF1" />
-                </svg>
-              </span>
+            <div className="channel_nav">
+              <NavLink to={'/user/' + profile[0].name} className="nav_item">FOLLOWED CHANNELS</NavLink>
+              <NavLink to={'/clips/' + profile[0].name} className="nav_item">CLIPS</NavLink>
+            </div>
+            <div className="period_toggle">
+              <Dropdown options={periods} onChange={this.changePreiod.bind(this)} value={periods.find(i => i.value === period)} />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px">
+                <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" fill="#EFEFF1" />
+              </svg>
             </div>
             {clips.length > 0 ? (
               <div className="clips_list">

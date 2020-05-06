@@ -19,9 +19,10 @@ export const ClipItem = (props) => {
           <span>{data.game}</span>
           <span>{timeFormat(data.created_at)}</span>
         </div>
+        {!!data.curator.display_name ? <span className="clip_author">Clipped by {data.curator.display_name}</span> : null}
         <h4 className="clip_title">{data.title}</h4>
       </a>
-      {data.vod !== null ? (
+      {!!data.vod ? (
         <div className="clip_bottom">
           <a className="btn clip_full" href={data.vod.url} target="_blank" rel="noopener noreferrer">Watch full video</a>
         </div>

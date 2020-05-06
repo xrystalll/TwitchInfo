@@ -15,7 +15,6 @@
   --default-transparent: transparent;
   --default-transparent-01: rgba(0, 0, 0, .1);
   --default-transparent-02: rgba(0, 0, 0, .2);
-  --default-transparent-04: rgba(0, 0, 0, .4);
   --default-transparent-06: rgba(0, 0, 0, .6);
   --default-transparent-08: rgba(0, 0, 0, .8);
   --secondary-transparent-04: rgba(173, 173, 184, .4);
@@ -424,7 +423,7 @@ article.container-profile-main {
   display: flex;
   flex-direction: column;
   list-style: none;
-  width: 50%;
+  width: 40%;
   margin-right: 32px;
 }
 
@@ -527,8 +526,40 @@ article.container-profile-main {
   }
 }
 
+.stream_container {
+  background: var(--secondary-bg);
+  padding: 8px 16px;
+}
+
+.stream_item {
+  background: var(--main-bg);
+  max-width: 320px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.live_title {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.live {
+  display: flex;
+  align-items: center;
+}
+
+i.live_dot {
+  background: var(--main-danger-color);
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: block;
+  margin-right: 8px;
+}
+
 .channel_nav {
-  margin-top: 24px;
+  background: var(--secondary-bg);
+  padding: 16px;
 }
 
 .nav_item {
@@ -714,14 +745,14 @@ article.container-profile-main {
   }
 }
 
-.clip_item a {
+.clip_item a, .stream_item a {
   color: var(--main-text-color);
 }
 
 .clip_header {
   display: flex;
   flex-direction: column;
-  padding: 12px 16px 6px 16px;
+  padding: 12px 16px 24px 16px;
 }
 
 .clip_header_top {
@@ -729,7 +760,7 @@ article.container-profile-main {
   justify-content: space-between;
   font-size: 13px;
   color: var(--main-control-tint);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .clip_header_top span {
@@ -739,12 +770,18 @@ article.container-profile-main {
 
 .clip_header_top span:first-of-type {
   text-overflow: ellipsis;
-  max-width: 70%;
+  max-width: 55%;
 }
 
 .clip_title {
   font-size: 18px;
   font-weight: 400;
+}
+
+.clip_author {
+  color: var(--secondary-transparent-04);
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .clip_thumb {
@@ -765,7 +802,7 @@ article.container-profile-main {
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(0, var(--default-transparent-04), var(--default-transparent));
+  background: linear-gradient(0, var(--default-transparent-06), var(--default-transparent));
 }
 
 .clip_stat {
@@ -775,11 +812,12 @@ article.container-profile-main {
   display: flex;
   justify-content: space-between;
   color: var(--default-white);
+  user-select: none;
 }
 
 .clip_stat span {
   margin: 4px 16px;
-  font-style: 14px;
+  font-size: 13px;
 }
 
 .clip_bottom {
@@ -795,18 +833,73 @@ article.container-profile-main {
 .period_toggle {
   padding: 16px;
   background: var(--secondary-bg);
-}
-
-.period_toggle span {
   display: flex;
   align-items: center;
-  cursor: pointer;
-  width: max-content;
-  user-select: none;
 }
 
 .period_toggle svg {
   margin-left: 12px;
+}
+
+.Dropdown-root {
   position: relative;
-  top: -1px;
+}
+
+.Dropdown-control {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  -webkit-user-select: none;
+  user-select: none;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.Dropdown-menu {
+  background-color: var(--main-control-color);
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  top: -10px;
+  width: max-content;
+  z-index: 9;
+  -webkit-overflow-scrolling: touch;
+}
+
+.Dropdown-menu .Dropdown-group > .Dropdown-title {
+  padding: 8px 16px;
+  color: var(--secondary-transparent-04);
+  text-transform: capitalize;
+}
+
+.Dropdown-option {
+  box-sizing: border-box;
+  color: var(--main-control-tint);
+  cursor: pointer;
+  display: block;
+  padding: 10px 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+.Dropdown-option:hover {
+  background-color: var(--default-transparent-02);
+}
+
+.Dropdown-option.is-selected {
+  background-color: var(--main-control-pressed);
+  color: var(--main-text-color);
+}
+
+.Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 8px 10px;
 }
