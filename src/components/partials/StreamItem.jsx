@@ -16,7 +16,7 @@ export const StreamItem = (props) => {
             <span>{counter(data.viewers)} viewers</span>
           </div>
         </div>
-        <div className="clip_header">
+        <div className="stream_header">
           <div className="clip_header_top">
             <span>{data.game}</span>
             <span>Started {timeFormat(data.created_at)}</span>

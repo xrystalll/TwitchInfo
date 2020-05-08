@@ -10,8 +10,8 @@ const Header = () => {
       input.classList.add('error')
     } else {
       input.classList.remove('error')
-      input.value = ''
       history.push('/user/' + input.value)
+      input.value = ''
     }
   }
 
@@ -23,6 +23,7 @@ const Header = () => {
       } else {
         input.classList.remove('error')
         history.push('/user/' + input.value)
+        input.value = ''
       }
     }
   }

@@ -3,26 +3,26 @@ import { Link } from 'react-router-dom';
 import { timeFormat } from '../support/Utils';
 
 export const FollowItem = (props) => {
-  const data = props.data
+  const data = props.data.channel
 
   return (
-    <Link to={'/user/' + data.channel.name} className="follow_item">
+    <Link to={'/user/' + data.name} className="follow_item">
       <div className="follow_item_left">
-        <img src={data.channel.logo} className="follow_img" alt="" />
+        <img src={data.logo} className="follow_img" alt="" />
       </div>
 
       <div className="follow_item_right">
         <div className="follow_name">
-          {data.channel.display_name}
-          {data.channel.partner ? (
+          {data.display_name}
+          {data.partner ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20">
               <path fillRule="evenodd" clipRule="evenodd" d="M10 2l6 2 2 6-2 6-6 2-6-2-2-6 2-6 6-2zM8.889 13.636l5.43-5.429-1.415-1.414-4.015 4.015-2.015-2.015-1.414 1.414 3.429 3.43z" fill="#9147ff" />
             </svg>
           ) : null}
         </div>
         <div className="follow_date">
-          Followed from {timeFormat(data.created_at)}
-          {data.notifications ? (
+          Followed from {timeFormat(props.data.created_at)}
+          {props.data.notifications ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
               <path d="M7.58 4.08L6.15 2.65C3.75 4.48 2.17 7.3 2.03 10.5h2c.15-2.65 1.51-4.97 3.55-6.42zm12.39 6.42h2c-.15-3.2-1.73-6.02-4.12-7.85l-1.42 1.43c2.02 1.45 3.39 3.77 3.54 6.42zM18 11c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2v-5zm-6 11c.14 0 .27-.01.4-.04.65-.14 1.18-.58 1.44-1.18.1-.24.15-.5.15-.78h-4c.01 1.1.9 2 2.01 2z" fill="#ADADB8" />
             </svg>
@@ -33,8 +33,8 @@ export const FollowItem = (props) => {
           )}
         </div>
         <div className="follow_tags">
-          {data.channel.game ? <span className="follow_tag">{data.channel.game}</span> : null}
-          {data.channel.language ? <span className="follow_tag">{data.channel.language}</span> : null}
+          {data.game ? <span className="follow_tag">{data.game}</span> : null}
+          {data.language ? <span className="follow_tag">{data.language}</span> : null}
         </div>
       </div>
     </Link>
