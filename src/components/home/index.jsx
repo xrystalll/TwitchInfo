@@ -11,7 +11,7 @@ const Home = () => {
       input.classList.add('error')
     } else {
       input.classList.remove('error')
-      history.push('/user/' + input.value)
+      history.push('/channel/' + input.value)
     }
   }
 
@@ -22,7 +22,7 @@ const Home = () => {
         input.classList.add('error')
       } else {
         input.classList.remove('error')
-        history.push('/user/' + input.value)
+        history.push('/channel/' + input.value)
       }
     }
   }

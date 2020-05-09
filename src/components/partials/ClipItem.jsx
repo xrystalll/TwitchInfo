@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { timeFormat, counter, toHHMMSS } from '../support/Utils';
 
-export const ClipItem = (props) => {
-  const data = props.data
+export const ClipItem = ({ data }) => {
   const vodExist = !!data.vod
 
   return (
@@ -24,7 +23,7 @@ export const ClipItem = (props) => {
         {!!data.curator ? (
           <div className="clip_author">
             Clipped by
-            <Link to={'/user/' + data.curator.name}>{data.curator.display_name}</Link>
+            <Link to={'/channel/' + data.curator.name}>{data.curator.display_name}</Link>
           </div>
         ) : null}
         <h4 className="clip_title">{data.title}</h4>

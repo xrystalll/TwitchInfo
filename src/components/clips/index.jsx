@@ -1,112 +1,64 @@
 import React, { Component } from 'react';
-import { Profile } from '../partials/Profile';
 import { ClipItem } from '../partials/ClipItem';
-import { Navigation } from '../partials/Navigation';
 import { Loader } from '../partials/Loader';
 import { Error } from '../partials/Error';
 import Dropdown from 'react-dropdown';
 
 class Clips extends Component {
-  constructor() {
+  _isMounted = false;
+  constructor(props) {
     super();
-    this.initialState = {
-      userId: 0,
-      clientId: 'ce4n64ldb15801hbrrz06vpq5dbain',
+    this.state = {
+      login: props.login,
+      clientId: props.clientId,
       period: 'week',
-      profile: [],
-      extendedInfo: [],
       clips: [],
-      noProfileData: false,
       noClipsData: false,
       limit: 10,
       cursor: '',
       loadMore: false,
       loadMoreInProgress: false
     }
-    this.state = this.initialState
   }
 
   componentDidMount() {
-    document.title = 'Get Twitch account info'
-    this.fetchProfile()
+    this._isMounted = true
+    this.fetchClips()
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params.login !== this.props.match.params.login) {
-      this.setState(this.initialState)
-      this.fetchProfile()
-    }
+  componentWillUnmount() {
+    this._isMounted = false
   }
 
-  async fetchProfile(login = this.props.match.params.login) {
+  async fetchClips(period = this.state.period) {
     try {
-      const data = await fetch('https://api.twitch.tv/kraken/users?login=' + login, {
+      const data = await fetch(`https://api.twitch.tv/kraken/clips/top?channel=${this.state.login}&period=${period}&limit=` + this.state.limit, {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.twitchtv.v5+json',
           'Client-ID': this.state.clientId
         }
       })
-      const profile = await data.json()
+      const res = await data.json()
 
-      if (profile.users.length > 0) {
-        this.setState({ extendedInfo: [profile.users[0]], userId: profile.users[0]._id })
-        this.getChannel()
-        this.getClips()
-      } else {
-        this.setState({ noProfileData: true })
-      }
-    } catch(e) {
-      this.setState({ noProfileData: true })
-      console.error(e)
-    }
-  }
-
-  getChannel(id = this.state.userId) {
-    fetch('https://api.twitch.tv/kraken/channels/' + id, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': this.state.clientId
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ profile: [data] })
-      })
-      .catch(e => {
-        this.setState({ noProfileData: true })
-        console.error(e)
-      })
-  }
-
-  getClips(period = this.state.period) {
-    fetch(`https://api.twitch.tv/kraken/clips/top?channel=${this.props.match.params.login}&period=${period}&limit=` + this.state.limit, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': this.state.clientId
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.clips.length > 0) {
-          this.setState({ clips: data.clips, cursor: data._cursor, loadMore: true })
-          if (data._cursor === '') {
+      if (this._isMounted) {
+        if (!res.error && res.clips.length > 0) {
+          this.setState({ clips: res.clips, cursor: res._cursor, loadMore: true })
+          if (res._cursor === '') {
             this.setState({ loadMore: false, loadMoreInProgress: false })
           }
         } else {
           this.setState({ noClipsData: true })
         }
-      })
-      .catch(e => {
-        this.setState({ noClipsData: true })
-        console.error(e)
-      })
+      }
+    } catch(e) {
+      this.setState({ noClipsData: true })
+      console.error(e)
+    }
   }
 
-  fetchMoreClips(cursor) {
-    fetch(`https://api.twitch.tv/kraken/clips/top?channel=${this.props.match.params.login}&period=${this.state.period}&limit=${this.state.limit}&cursor=` + cursor, {
+  fetchMoreClips() {
+    fetch(`https://api.twitch.tv/kraken/clips/top?channel=${this.state.login}&period=${this.state.period}&limit=${this.state.limit}&cursor=` + this.state.cursor, {
       method: 'GET',
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
@@ -116,7 +68,7 @@ class Clips extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.clips.length > 0 && this.state.cursor !== '') {
-          this.setState({ clips: [...this.state.clips, ...data.clips], loadMoreInProgress: false, cursor: data._cursor })
+          this.setState({ clips: [...this.state.clips, ...data.clips], cursor: data._cursor, loadMoreInProgress: false })
           if (data._cursor === '') {
             this.setState({ loadMore: false, loadMoreInProgress: false })
           }
@@ -131,36 +83,38 @@ class Clips extends Component {
   }
 
   loadMoreClips() {
-    this.setState({ loadMoreInProgress: true })
-    this.fetchMoreClips(this.state.cursor)
+    if (!this.state.loadMoreInProgress) {
+      this.setState({ loadMoreInProgress: true })
+      this.fetchMoreClips()
+    }
   }
 
   changePreiod(e) {
     switch(e.value) {
       case 'day':
-        this.setState({ clips: [], period: 'day', cursor: '', loadMore: false })
-        this.getClips('day')
+        this.setState({ clips: [], noClipsData: false, period: 'day', cursor: '', loadMore: false })
+        this.fetchClips('day')
         break
       case 'week':
-        this.setState({ clips: [], period: 'week', cursor: '', loadMore: false })
-        this.getClips('week')
+        this.setState({ clips: [], noClipsData: false, period: 'week', cursor: '', loadMore: false })
+        this.fetchClips('week')
         break
       case 'month':
-        this.setState({ clips: [], period: 'month', cursor: '', loadMore: false })
-        this.getClips('month')
+        this.setState({ clips: [], noClipsData: false, period: 'month', cursor: '', loadMore: false })
+        this.fetchClips('month')
         break
       case 'all':
-        this.setState({ clips: [], period: 'all', cursor: '', loadMore: false })
-        this.getClips('all')
+        this.setState({ clips: [], noClipsData: false, period: 'all', cursor: '', loadMore: false })
+        this.fetchClips('all')
         break
       default:
-        this.setState({ clips: [], period: 'week', cursor: '', loadMore: false })
-        this.getClips('week')
+        this.setState({ clips: [], noClipsData: false, period: 'week', cursor: '', loadMore: false })
+        this.fetchClips('week')
     }
   }
 
   render() {
-    const { profile, extendedInfo, clips, noProfileData, noClipsData, loadMore, loadMoreInProgress, period } = this.state
+    const { clips, noClipsData, loadMore, loadMoreInProgress, period } = this.state
     const periods = [{
       value: 'day', label: 'Popular - 24 hours'
     }, {
@@ -172,34 +126,26 @@ class Clips extends Component {
     }]
     return (
       <>
-        {profile.length > 0 ? (
-          <div>
-            <Profile data={profile} extended={extendedInfo} />
-            <Navigation login={profile[0].name} />
-            <div className="period_toggle_wrap">
-              <div className="period_toggle">
-                <Dropdown options={periods} onChange={this.changePreiod.bind(this)} value={periods.find(i => i.value === period)} />
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px">
-                  <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" fill="#EFEFF1" />
-                </svg>
-              </div>
-            </div>
-            {clips.length > 0 ? (
-              <div className="clips_list">
-                {clips.map(item => (
-                  <ClipItem key={item.slug} data={item} />
-                ))}
-              </div>
-            ) : (
-              !noClipsData ? <Loader /> : <Error message="No clips" />
-            )}
+        <div className="period_toggle_wrap">
+          <div className="period_toggle">
+            <Dropdown options={periods} onChange={this.changePreiod.bind(this)} value={periods.find(i => i.value === period)} />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px">
+              <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" fill="#EFEFF1" />
+            </svg>
+          </div>
+        </div>
+        {clips.length > 0 ? (
+          <div className="clips_list">
+            {clips.map(item => (
+              <ClipItem key={item.slug} data={item} />
+            ))}
           </div>
         ) : (
-          !noProfileData ? <Loader /> : <Error message="Nothing! Try another username" />
+          !noClipsData ? <Loader className="long" /> : <Error message="No clips" />
         )}
         {loadMore ? (
-          <div onClick={this.loadMoreClips.bind(this)} className="foot_center">
-            <div className="load_more">
+          <div className="foot_center">
+            <div onClick={this.loadMoreClips.bind(this)} className="load_more">
               {loadMoreInProgress ? (
                 <span className="more_loader">
                   <Loader />

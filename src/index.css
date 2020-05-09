@@ -259,6 +259,16 @@ main .input_text, main .btn_main {
   margin-top: 40px;
 }
 
+.content_loader.long {
+  height: 200px;
+  margin: 0;
+}
+
+.content_loader.full {
+  height: 100vh;
+  margin: 0;
+}
+
 .user_logo {
   width: 96px;
   height: 96px;
@@ -567,6 +577,7 @@ i.live_dot {
 .channel_nav {
   background: var(--secondary-bg);
   padding: 16px;
+  user-select: none;
 }
 
 .nav_item {
@@ -577,6 +588,7 @@ i.live_dot {
 .nav_item.active {
   color: var(--accent-color);
   border-bottom: 2px solid;
+  pointer-events: none;
 }
 
 .nav_item:first-of-type {
@@ -669,6 +681,7 @@ i.live_dot {
   background: var(--secondary-bg);
   box-shadow: var(--default-transparent-01) 0 2px 4px 0;
   transition: all .3s ease-out;
+  user-select: none;
   cursor: pointer;
   z-index: 2;
 }
@@ -918,6 +931,7 @@ i.live_dot {
   top: -4px;
   width: max-content;
   -webkit-overflow-scrolling: touch;
+  user-select: none;
   z-index: 9;
 }
 

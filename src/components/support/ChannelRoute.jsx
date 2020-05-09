@@ -7,7 +7,7 @@ const ChannelRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render = {props =>
+      render = {props => (
         <>
           <Header />
 
@@ -19,7 +19,7 @@ const ChannelRoute = ({ component: Component, ...rest }) => {
             </section>
           </CustomScrollbar>
         </>
-      }
+      )}
     />
   )
 }

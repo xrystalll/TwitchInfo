@@ -6,7 +6,7 @@ export const FollowItem = (props) => {
   const data = props.data.channel
 
   return (
-    <Link to={'/user/' + data.name} className="follow_item">
+    <Link to={'/channel/' + data.name} className="follow_item">
       <div className="follow_item_left">
         <img src={data.logo} className="follow_img" alt="" />
       </div>

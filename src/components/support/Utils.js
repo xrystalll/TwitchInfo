@@ -1,4 +1,5 @@
 export const timeFormat = (timestamp) => {
+  if (!timestamp) timestamp = Date.now()
   const time = new Date(timestamp).getTime()
   const d = new Date()
   const t = new Date(time)
@@ -28,7 +29,7 @@ export const timeFormat = (timestamp) => {
 }
 
 export const counter = (count) => {
-  if (count === 0) return 0
+  if (!count || count === 0) return 0
   if (count < 1e3) return count
   if (count >= 1e3 && count < 1e6) return `${+(count / 1e3).toFixed(1)}K`
   if (count >= 1e6 && count < 1e9) return `${+(count / 1e6).toFixed(1)}M`
@@ -36,6 +37,7 @@ export const counter = (count) => {
 }
 
 export const toHHMMSS = (sec) => {
+  if (!sec) sec = 0
   const secNum = parseInt(sec, 10)
   let hours = Math.floor(secNum / 3600)
   const minutes = Math.floor((secNum - (hours * 3600)) / 60)

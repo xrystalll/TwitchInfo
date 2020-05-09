@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Follows from '../follows'
+import Clips from '../clips'
 import { Profile } from '../partials/Profile';
 import { StreamItem } from '../partials/StreamItem';
-import { FollowItem } from '../partials/FollowItem';
 import { Navigation } from '../partials/Navigation';
 import { Loader } from '../partials/Loader';
 import { Error } from '../partials/Error';
@@ -14,15 +16,9 @@ class Channel extends Component {
       clientId: 'ce4n64ldb15801hbrrz06vpq5dbain',
       profile: [],
       extendedInfo: [],
-      follows: [],
       stream: [],
       live: false,
-      noProfileData: false,
-      noFollowsData: false,
-      limit: 10,
-      offset: 0,
-      loadMore: false,
-      loadMoreInProgress: false
+      noProfileData: false
     }
     this.state = this.initialState
   }
@@ -50,11 +46,10 @@ class Channel extends Component {
       })
       const profile = await data.json()
 
-      if (profile.users.length > 0) {
+      if (!profile.error && profile.users.length > 0) {
         this.setState({ extendedInfo: [profile.users[0]], userId: profile.users[0]._id })
         this.getChannel()
         this.getStream()
-        this.getFollows()
       } else {
         this.setState({ noProfileData: true })
       }
@@ -104,99 +99,28 @@ class Channel extends Component {
       })
   }
 
-  getFollows() {
-    fetch(`https://api.twitch.tv/kraken/users/${this.state.userId}/follows/channels?limit=${this.state.limit}&offset=` + this.state.offset, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': this.state.clientId
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.follows.length > 0) {
-          this.setState({ follows: data.follows, loadMore: true })
-        } else {
-          this.setState({ noFollowsData: true })
-        }
-      })
-      .catch(e => {
-        this.setState({ noFollowsData: true })
-        console.error(e)
-      })
-  }
-
-  fetchMoreFollows(userId, offset) {
-    fetch(`https://api.twitch.tv/kraken/users/${this.state.userId}/follows/channels?limit=${this.state.limit}&offset=` + offset, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': this.state.clientId
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (!data.follows.length) {
-          this.setState({ loadMore: false, loadMoreInProgress: false })
-          return
-        }
-
-        this.setState({ follows: [...this.state.follows, ...data.follows], loadMoreInProgress: false })
-      })
-      .catch(e => console.error(e))
-  }
-
-  loadMoreFollows() {
-    this.setState({ offset: this.state.offset + this.state.limit, loadMoreInProgress: true })
-    this.fetchMoreFollows(this.state.userId, this.state.offset + this.state.limit)
-  }
-
-  changeUser(login, e) {
-    this.setState(this.initialState)
-    this.fetchProfile(login)
-  }
-
   render() {
-    const { profile, extendedInfo, follows, stream, live, noProfileData, noFollowsData, loadMore, loadMoreInProgress } = this.state
+    const { profile, extendedInfo, stream, live, noProfileData } = this.state
     return (
-      <>
-        {profile.length > 0 ? (
-          <div>
-            <Profile data={profile} extended={extendedInfo} />
-            {live ? (
-              <div className="stream_container">
-                <div className="live_title">Live stream</div>
-                <StreamItem data={stream} />
-              </div>
-            ) : null}
-            <Navigation login={profile[0].name} />
-            {follows.length > 0 ? (
-              <div className="follows_list">
-                {follows.map(item => (
-                  <div key={item.channel._id} onClick={this.changeUser.bind(this, item.channel.name)}>
-                    <FollowItem data={item} />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              !noFollowsData ? <Loader /> : <Error message="No follows" />
-            )}
-          </div>
-        ) : (
-          !noProfileData ? <Loader /> : <Error message="Nothing! Try another username" />
-        )}
-        {loadMore ? (
-          <div onClick={this.loadMoreFollows.bind(this)} className="foot_center">
-            <div className="load_more">
-              {loadMoreInProgress ? (
-                <span className="more_loader">
-                  <Loader />
-                </span>
-              ) : <span className="more_text">Load more follows</span>}
-            </div>
-          </div>
-        ) : null}
-      </>
+      profile.length > 0 ? (
+        <div>
+          <Profile data={profile} extended={extendedInfo} />
+          {live ? <StreamItem data={stream} /> : null}
+          <Navigation login={profile[0].name} />
+          <Switch>
+            <Route
+              path="/channel/:login" exact
+              component={(props) => <Follows userId={profile[0]._id} clientId={this.state.clientId} />}
+            />
+            <Route
+              path="/channel/:login/clips"
+              component={(props) => <Clips login={profile[0].name} clientId={this.state.clientId} />}
+            />
+          </Switch>
+        </div>
+      ) : (
+        !noProfileData ? <Loader className="full" /> : <Error message="Nothing! Try another username" />
+      )
     )
   }
 }
