@@ -705,7 +705,7 @@ i.live_dot {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 50px;
-  box-shadow: inset 0 0 10px 10px var(--main-control-pressed);
+  box-shadow: inset 0 0 10px 10px var(--secondary-transparent-04);
   border: solid 4px var(--default-transparent);
 }
 
@@ -716,6 +716,7 @@ i.live_dot {
   top: 3px;
   border-radius: 4px;
   z-index: 11;
+  user-select: none;
 }
 
 @media (max-width: 570px) {
@@ -731,12 +732,14 @@ i.live_dot {
 
 .track-horizontal {
   display: none;
+  user-select: none;
 }
 
 .thumb-vertical, .thumb-horizontal {
   border-radius: inherit;
   background-color: var(--secondary-transparent-04);
   cursor: pointer;
+  user-select: none;
 }
 
 .http_error_container {
@@ -959,6 +962,7 @@ i.live_dot {
 .Dropdown-option.is-selected {
   background-color: var(--main-control-pressed);
   color: var(--main-text-color);
+  pointer-events: none;
 }
 
 .Dropdown-noresults {

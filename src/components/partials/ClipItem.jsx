@@ -28,23 +28,23 @@ export const ClipItem = ({ data }) => {
         ) : null}
         <h4 className="clip_title">{data.title}</h4>
       </div>
-        <div className="clip_bottom">
-          {vodExist ? (
-            <a className="btn clip_full" href={data.vod.url} target="_blank" rel="noopener noreferrer">Watch full video</a>
-          ) : null}
-          <a
-            className={`btn clip_download${vodExist ? ' short' : ''}`}
-            href={data.thumbnails.tiny.replace('-preview-86x45.jpg', '.mp4')}
-            target="_blank"
-            rel="noopener noreferrer"
-            download
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
-              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="#efeff1" />
-            </svg>
-            {!vodExist ? <span>Download clip</span> : null}
-          </a>
-        </div>
+      <div className="clip_bottom">
+        {vodExist ? (
+          <a className="btn clip_full" href={data.vod.url} target="_blank" rel="noopener noreferrer">Watch full video</a>
+        ) : null}
+        <a
+          className={`btn clip_download${vodExist ? ' short' : ''}`}
+          href={data.thumbnails.tiny.replace('-preview-86x45.jpg', '.mp4')}
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="#efeff1" />
+          </svg>
+          {!vodExist ? <span>Download clip</span> : null}
+        </a>
+      </div>
     </div>
   )
 }

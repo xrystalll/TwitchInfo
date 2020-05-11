@@ -35,9 +35,9 @@ class Channel extends Component {
     }
   }
 
-  async fetchProfile(login = this.props.match.params.login) {
+  async fetchProfile() {
     try {
-      const data = await fetch('https://api.twitch.tv/kraken/users?login=' + login, {
+      const data = await fetch('https://api.twitch.tv/kraken/users?login=' + this.props.match.params.login, {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.twitchtv.v5+json',
@@ -87,7 +87,7 @@ class Channel extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.stream !== null) {
+        if (!data.error && data.stream !== null) {
           this.setState({ stream: data.stream, live: true })
         } else {
           this.setState({ live: false })
@@ -119,7 +119,7 @@ class Channel extends Component {
           </Switch>
         </div>
       ) : (
-        !noProfileData ? <Loader className="full" /> : <Error message="Nothing! Try another username" />
+        !noProfileData ? <Loader className="full" size="32" /> : <Error message="Nothing! Try another username" />
       )
     )
   }
