@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ClipItem } from '../partials/ClipItem';
+import ClipItem from '../partials/ClipItem';
 import { Loader } from '../partials/Loader';
 import { Error } from '../partials/Error';
 import Dropdown from 'react-dropdown';
