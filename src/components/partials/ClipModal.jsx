@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { timeFormat, counter } from '../support/Utils';
 
 export const ClipModal = ({ data }) => {
+  const [copied, toggleCopyState] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => toggleCopyState(false), 2000)
+    return () => clearTimeout(timer)
+  }, [copied])
+
+  const copyText = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => toggleCopyState(true))
+      .catch(err => console.error('Could not copy text.', err))
+  }
+
+  const clipRatio = '16-9'
+  const isCopied = copied ? ' copied_noactive' : ''
   const vodExist = !!data.vod
 
   return (
@@ -10,11 +25,11 @@ export const ClipModal = ({ data }) => {
       <div className="position">
         <div className="body">
           <div className="body_flex">
-            <div className="body_width body_ratio_16-9">
+            <div className={'body_width body_ratio_' + clipRatio}>
               <div className="body_bg">
 
                 <div className="top">
-                  <div className="view_ratio ratio_16-9">
+                  <div className={'view_ratio ratio_' + clipRatio}>
                     <div className="view_content">
                       <video
                         className="video"
@@ -44,6 +59,25 @@ export const ClipModal = ({ data }) => {
                                   <div className="author_name">{data.broadcaster.display_name}</div>
                                   <div className="created_time">{data.game}</div>
                                 </div>
+
+                                {'clipboard' in navigator ? (
+                                  <div
+                                    onClick={copyText.bind(this, data.url.replace('?tt_medium=clips_api&tt_content=url', ''))}
+                                    className={'clip_action_share' + isCopied}
+                                    title="Copy link to this clip on Twitch"
+                                  >
+                                    {!copied ? (
+                                      <svg width="20px" height="20px" version="1.1" viewBox="0 0 20 20" x="0px" y="0px">
+                                        <path d="M2 8a2 2 0 012-2v10h10a2 2 0 01-2 2H4a2 2 0 01-2-2V8z" />
+                                        <path fillRule="evenodd" clipRule="evenodd" d="M6 4a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H8a2 2 0 01-2-2V4zm2 8V4h8v8H8z" />
+                                      </svg>
+                                    ) : (
+                                      <svg className="clip_copied" width="20px" height="20px" version="1.1" viewBox="0 0 20 20" x="0px" y="0px">
+                                        <path d="M4 10l5 5 8-8-1.5-1.5L9 12 5.5 8.5 4 10z" />
+                                      </svg>
+                                    )}
+                                  </div>
+                                ) : ''}
                               </div>
 
                             </div>
@@ -74,6 +108,7 @@ export const ClipModal = ({ data }) => {
                                 <a className="btn clip_full" href={data.vod.url} target="_blank" rel="noopener noreferrer">Watch full video</a>
                               ) : null}
                               <a
+                                title="Download clip"
                                 className={`btn clip_download${vodExist ? ' short' : ''}`}
                                 href={data.thumbnails.tiny.replace('-preview-86x45.jpg', '.mp4')}
                                 target="_blank"
@@ -99,7 +134,7 @@ export const ClipModal = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="cover"></div>
+      <div className="cover" />
     </div>
   )
 }

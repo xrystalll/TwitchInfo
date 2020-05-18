@@ -7,6 +7,7 @@
   --main-control-color: #3A3A3D;
   --main-control-pressed: #28282B;
   --main-control-tint: #ADADB8;
+  --main-success-color: #4CAF50;
   --main-danger-color: #E53935;
   --secondary-bg: #18181B;
   --secondary-color: #8E9399;
@@ -126,7 +127,7 @@ a {
 
 .container {
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
   z-index: 1;
 }
@@ -783,7 +784,7 @@ i.live_dot {
   }
 }
 
-.clip_item a, .stream_item a {
+.clip_item a, .stream_item a, .clip_bottom a {
   color: var(--main-text-color);
 }
 
@@ -886,6 +887,7 @@ i.live_dot {
   align-items: center;
   width: 100%;
   margin-right: 8px;
+  line-height: 20px;
 }
 
 .clip_download {
@@ -893,7 +895,7 @@ i.live_dot {
   justify-content: center;
   align-items: center;
   padding: 0;
-  height: 37px;
+  height: 36px;
   width: 100%;
 }
 
@@ -903,7 +905,7 @@ i.live_dot {
 
 .clip_download.short {
   width: initial;
-  min-width: 37px;
+  min-width: 36px;
 }
 
 .period_toggle_wrap {
@@ -973,9 +975,21 @@ i.live_dot {
 }
 
 .Dropdown-option.is-selected {
+  position: relative;
   background-color: var(--main-control-pressed);
   color: var(--main-text-color);
   pointer-events: none;
+}
+
+.Dropdown-option.is-selected:before {
+  content: '';
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" version="1.1" viewBox="0 0 20 20" x="0px" y="0px"%3E%3Cpath d="M4 10l5 5 8-8-1.5-1.5L9 12 5.5 8.5 4 10z" fill="%23efeff1"%3E%3C/path%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 11px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
 }
 
 .Dropdown-noresults {
@@ -1145,6 +1159,7 @@ i.live_dot {
   font-size: .9rem;
   margin-bottom: 8px;
   display: flex;
+  max-width: fit-content;
   align-items: center;
 }
 .bottom .clip_info_views svg {
@@ -1158,8 +1173,12 @@ i.live_dot {
 }
 .bottom .clip_info_created {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 24px;
   color: var(--secondary-color);
+  font-size: .9rem;
+}
+.bottom .clip_info_created div {
   white-space: nowrap;
 }
 .bottom .clip_info_time {
@@ -1176,14 +1195,16 @@ i.live_dot {
 }
 .author_box {
   display: flex;
+  width: 100%;
   height: 100%;
-  padding: 0 16px;
+  padding-left: 16px;
 }
 .author_text {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
+  margin-left: 16px;
 }
 .author_name {
   display: flex;
@@ -1197,7 +1218,6 @@ i.live_dot {
   color: var(--secondary-color);
 }
 .avatar_box {
-  margin-right: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1212,6 +1232,23 @@ i.live_dot {
 .author_avatar img {
   height: 100%;
   width: 100%;
+}
+.clip_action_share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 48px;
+  cursor: pointer;
+}
+.clip_action_share.copied_noactive {
+  pointer-events: none;
+}
+.clip_action_share svg path {
+  fill: var(--accent-color);
+}
+.clip_action_share .clip_copied path {
+  fill: var(--main-success-color);
 }
 
 @media (max-width: 1000px) {
@@ -1228,5 +1265,8 @@ i.live_dot {
   .modal .bottom {
     width: initial !important;
     min-height: 286px;
+  }
+  .top .view_content .video {
+    border-radius: 4px 4px 0 0;
   }
 }
