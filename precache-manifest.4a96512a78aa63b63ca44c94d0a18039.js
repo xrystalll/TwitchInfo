@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "07c18ecfddf2731456ac8a946a3ef1e9",
+    "revision": "4b8952eb09163193f848799260646fde",
     "url": "/TwitchInfo/index.html"
   },
   {
-    "revision": "0215cb33e202db123901",
-    "url": "/TwitchInfo/static/css/main.4bac935e.chunk.css"
+    "revision": "61374594c8a142e51fd7",
+    "url": "/TwitchInfo/static/css/main.13ed180e.chunk.css"
   },
   {
-    "revision": "51e677428591549b8696",
-    "url": "/TwitchInfo/static/js/2.17017c68.chunk.js"
+    "revision": "e99c2564d484449326c1",
+    "url": "/TwitchInfo/static/js/2.06ee0d14.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/TwitchInfo/static/js/2.17017c68.chunk.js.LICENSE.txt"
+    "url": "/TwitchInfo/static/js/2.06ee0d14.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0215cb33e202db123901",
-    "url": "/TwitchInfo/static/js/main.c14b56d0.chunk.js"
+    "revision": "61374594c8a142e51fd7",
+    "url": "/TwitchInfo/static/js/main.05d2cd3d.chunk.js"
   },
   {
     "revision": "11e5281e438ab06b6709",
