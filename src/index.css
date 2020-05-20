@@ -7,21 +7,41 @@
   --main-control-bg: #3A3A3D;
   --main-control-color: #CECECE;
   --main-control-pressed: #28282B;
+  --main-control-hover: #303030;
   --main-success-color: #4CAF50;
   --main-danger-color: #E53935;
   --secondary-bg: #18181B;
+  --secondary-sub-bg: #323234;
   --secondary-color: #8E9399;
   --secondary-sub-color: #A8A8B3;
+  --secondary-color-light: #53535A;
   --secondary-tint: #1F1F23;
   --selection-bg: #772CE8;
   --selection-color: #D6D6D4;
-  --default-mochrome: #FFF;
+  --dark-monochrome: #FFF;
+  --light-monochrome: #FFF;
   --default-transparent: transparent;
   --default-transparent-01: rgba(0, 0, 0, .1);
   --default-transparent-02: rgba(0, 0, 0, .2);
   --default-transparent-06: rgba(0, 0, 0, .6);
   --default-transparent-08: rgba(0, 0, 0, .8);
   --secondary-transparent-04: rgba(173, 173, 184, .4);
+}
+.light-theme {
+  --main-bg: #e0e0e0;
+  --main-text-color: #000;
+  --main-control-bg: #e8e8e8;
+  --main-control-color: #616161;
+  --main-control-pressed: #d2d2d2;
+  --main-control-hover: #c7c7c7;
+  --secondary-bg: #FFF;
+  --secondary-sub-bg: #d6d6d6;
+  --secondary-color: #656565;
+  --secondary-sub-color: #4c4c4c;
+  --secondary-color-light: #9e9e9e;
+  --secondary-tint: #c3c3c3;
+  --dark-monochrome: #000;
+  --secondary-transparent-04: rgba(18, 18, 18, .4);
 }
 * {
   outline: none;
@@ -83,6 +103,7 @@ a {
   background-position: top;
   background-attachment: fixed;
   filter: blur(5px);
+  transform: scale(1.04);
   position: absolute;
   top: 0;
   right: 0;
@@ -106,6 +127,7 @@ a {
   justify-content: center;
   align-items: center;
   height: 100%;
+  color: var(--light-monochrome)
 }
 
 .main_form {
@@ -172,7 +194,7 @@ header {
 }
 
 .tw-glitch-logo__face {
-  fill: var(--main-bg);
+  fill: var(--secondary-bg);
 }
 
 .input_text {
@@ -180,10 +202,10 @@ header {
   padding: 6px 16px;
   color: var(--main-control-color);
   background: var(--main-control-bg);
-  border: 2px solid var(--default-transparent);
+  border: var(--default-transparent) solid 2px;
   border-radius: 8px;
   width: 100%;
-  transition: box-shadow .2s ease-in, border .2s ease-in, background-color .2s ease-in;
+  transition: all .2s ease-in;
 }
 
 .input_text:focus {
@@ -215,7 +237,7 @@ header {
   background: var(--main-control-bg);
   border-radius: 8px;
   max-width: 100%;
-  transition: box-shadow .2s ease-in, border .2s ease-in, background-color .2s ease-in;
+  transition: all .2s ease-in;
   cursor: pointer;
   user-select: none;
 }
@@ -243,6 +265,10 @@ main .input_text, main .btn_main {
   height: 200px;
 }
 
+.empty-results svg .path_info {
+  fill: var(--secondary-color-light);
+}
+
 .empty_words {
   max-width: 210px;
   text-align: center;
@@ -264,7 +290,7 @@ main .input_text, main .btn_main {
 }
 
 .content_loader svg circle {
-  stroke: var(--default-mochrome);
+  stroke: var(--dark-monochrome);
 }
 
 .content_loader.long {
@@ -316,7 +342,7 @@ article.container-profile-main {
 }
 
 .user-info .butt_links {
-  color: var(--default-mochrome);
+  color: var(--dark-monochrome);
   line-height: 25px;
 }
 
@@ -387,10 +413,11 @@ article.container-profile-main {
 }
 
 .user-profile-content .user-head div.user-info .avatar img {
-  width: 150px;
-  height: 150px;
+  display: block;
+  width: 100%;
+  height: 100%;
   background: var(--main-bg);
-  box-shadow: 0 2px 6px var(--default-transparent-02);
+  box-shadow: var(--default-transparent-02) 0 2px 6px;
 }
 
 .user-profile-content .user-head div.user-info .info {
@@ -420,7 +447,7 @@ article.container-profile-main {
 }
 
 .user-profile-content .user-head div.user-info .uname h4 {
-  color: var(--default-mochrome);
+  color: var(--light-monochrome);
   margin: 0px !important;
   font-size: 32px;
   font-weight: 500 !important;
@@ -444,6 +471,7 @@ article.container-profile-main {
   list-style: none;
   width: 40%;
   margin-right: 32px;
+  color: var(--light-monochrome);
 }
 
 .user-profile-content .social_count {
@@ -460,7 +488,7 @@ article.container-profile-main {
 .user-profile-content .user-head div.user-info .bio {
   font-size: 17px;
   margin-bottom: 0px;
-  color: var(--default-mochrome);
+  color: var(--light-monochrome);
   max-width: 350px;
   margin: 0 auto;
 }
@@ -631,7 +659,7 @@ i.live_dot {
 .follow_tag {
   font-size: 13px;
   color: var(--main-text-color);
-  background: var(--default-transparent-02);
+  background: var(--secondary-sub-bg);
   border-radius: 50px;
   padding: 4px 10px;
   margin-right: 4px;
@@ -654,7 +682,7 @@ i.live_dot {
   justify-content: center;
   color: var(--main-text-color);
   background: var(--secondary-bg);
-  box-shadow: var(--default-transparent-01) 0 2px 4px 0;
+  box-shadow: var(--default-transparent-01) 0 2px 4px;
   transition: all .3s ease-out;
   user-select: none;
   cursor: pointer;
@@ -663,7 +691,7 @@ i.live_dot {
 
 .load_more:hover {
   background: var(--accent-color);
-  box-shadow: var(--default-transparent-02) 0 2px 6px 0;
+  box-shadow: var(--default-transparent-02) 0 2px 6px;
 }
 
 .more_text, .more_loader {
@@ -737,7 +765,7 @@ i.live_dot {
 }
 
 .clip_author {
-  color: var(--secondary-transparent-04);
+  color: var(--secondary-color-light);
   font-size: 14px;
   margin-bottom: 10px;
 }
@@ -754,7 +782,7 @@ i.live_dot {
   padding-top: 56.25%;
   background-size: cover;
   background-position: center;
-  background-color: var(--main-control-bg);
+  background-color: var(--secondary-sub-bg);
   background-repeat: no-repeat;
   cursor: pointer;
 }
@@ -783,7 +811,7 @@ i.live_dot {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  color: var(--default-mochrome);
+  color: var(--light-monochrome);
   user-select: none;
   pointer-events: none;
   z-index: 1;
@@ -841,7 +869,7 @@ i.live_dot {
   align-items: center;
   width: fit-content;
   color: var(--main-control-color);
-  background: var(--main-control-pressed);
+  background: var(--main-control-bg);
   border-radius: 8px;
   padding-right: 12px;
 }
@@ -899,13 +927,13 @@ i.live_dot {
 }
 
 .Dropdown-option:hover {
-  background-color: var(--default-transparent-02);
+  background-color: var(--main-control-hover);
 }
 
 .Dropdown-option.is-selected {
   position: relative;
   background-color: var(--main-control-pressed);
-  color: var(--main-text-color);
+  color: var(--main-control-color);
   pointer-events: none;
 }
 
@@ -1307,8 +1335,8 @@ i.live_dot {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 50px;
-  box-shadow: inset 0 0 10px 10px var(--secondary-transparent-04);
-  border: solid 4px var(--default-transparent);
+  box-shadow: var(--secondary-transparent-04) inset 0 0 10px 10px;
+  border: var(--default-transparent) solid 4px;
 }
 
 .track-vertical {

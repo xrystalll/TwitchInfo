@@ -34,6 +34,7 @@ export const ClipModal = ({ data }) => {
                       <video
                         className="video"
                         src={data.thumbnails.tiny.replace('-preview-86x45.jpg', '.mp4')}
+                        poster={data.thumbnails.medium}
                         controls
                       />
                     </div>
