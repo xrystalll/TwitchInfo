@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ClipModal } from './ClipModal'
+import { ClipModal } from './ClipModal';
 import { timeFormat, counter, toHHMMSS } from '../support/Utils';
 
 class ClipItem extends Component {

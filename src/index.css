@@ -578,6 +578,7 @@ i.live_dot {
 .nav_item {
   color: var(--main-text-color);
   padding: 8px 0 8px;
+  margin-right: 16px;
 }
 
 .nav_item.active {
@@ -586,8 +587,8 @@ i.live_dot {
   pointer-events: none;
 }
 
-.nav_item:first-of-type {
-  margin-right: 16px;
+.nav_item:last-of-type {
+  margin-right: 0;
 }
 
 .follows_list {
@@ -1249,6 +1250,59 @@ i.live_dot {
   fill: var(--main-success-color);
 }
 
+.emotes {
+  background: var(--secondary-bg);
+  padding: 16px;
+}
+
+.emote_grid:not(:first-of-type) {
+  margin-top: 32px;
+}
+
+.emote_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  grid-gap: 16px;
+ }
+
+ .tier_title {
+  grid-column: 1 / -1;
+  font-size: 16px;
+  font-weight: 500;
+ }
+
+.emote_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 8px;
+}
+
+.emote_img {
+  width: 42px;
+  height: 42px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.emote_name {
+  margin-top: 8px;
+  max-width: 72px;
+  color: var(--secondary-sub-color);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.emote_item:hover .emote_name {
+  color: var(--main-text-color);
+  background: var(--secondary-sub-bg);
+  border-radius: 50px;
+  padding: 0 8px;
+  max-width: initial;
+  z-index: 1;
+}
 
 @media (max-width: 455px) {
   .user-profile-content .user-head div.user-info .avatar, .user-profile-content .user-head div.user-info .avatar img {

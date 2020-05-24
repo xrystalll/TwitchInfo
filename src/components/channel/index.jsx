@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Follows from '../follows'
-import Clips from '../clips'
+import Follows from '../follows';
+import Clips from '../clips';
+import Emotes from '../emotes';
 import { Profile } from '../partials/Profile';
 import { StreamItem } from '../partials/StreamItem';
 import { Navigation } from '../partials/Navigation';
@@ -115,6 +116,10 @@ class Channel extends Component {
             <Route
               path="/channel/:login/clips"
               component={(props) => <Clips login={profile[0].name} clientId={this.state.clientId} />}
+            />
+            <Route
+              path="/channel/:login/emotes"
+              component={(props) => <Emotes userId={profile[0]._id} />}
             />
           </Switch>
         </div>
