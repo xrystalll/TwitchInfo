@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Follows from '../follows';
-import Clips from '../clips';
-import Emotes from '../emotes';
 import { Profile } from '../partials/Profile';
 import { StreamItem } from '../partials/StreamItem';
 import { Navigation } from '../partials/Navigation';
@@ -110,21 +106,11 @@ class Channel extends Component {
         <div>
           <Profile data={profile} extended={extendedInfo} />
           {live ? <StreamItem data={stream} /> : null}
-          <Navigation login={profile[0].name} />
-          <Switch>
-            <Route
-              path="/channel/:login" exact
-              component={(props) => <Follows userId={profile[0]._id} clientId={this.state.clientId} />}
-            />
-            <Route
-              path="/channel/:login/clips"
-              component={(props) => <Clips login={profile[0].name} clientId={this.state.clientId} />}
-            />
-            <Route
-              path="/channel/:login/emotes"
-              component={(props) => <Emotes userId={profile[0]._id} />}
-            />
-          </Switch>
+          <Navigation data={{
+            clientId: this.state.clientId,
+            userId: profile[0]._id,
+            login: profile[0].name
+          }} />
         </div>
       ) : (
         !noProfileData ? <Loader className="full" size="32" /> : <Error message="Nothing! Try another username" />
