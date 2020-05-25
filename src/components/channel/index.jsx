@@ -48,7 +48,7 @@ class Channel extends Component {
       const profile = await data.json()
 
       if (!profile.error && profile.users.length > 0) {
-        this.setState({ extendedInfo: [profile.users[0]], userId: profile.users[0]._id })
+        this.setState({ extendedInfo: [profile.users[0]], userId: Number(profile.users[0]._id) })
         this.getChannel()
         this.getStream()
       } else {
@@ -91,6 +91,8 @@ class Channel extends Component {
         if (!data.error && data.stream !== null) {
           this.setState({ stream: data.stream, live: true })
         } else {
+          if (this.state.live === false) return
+
           this.setState({ live: false })
         }
       })

@@ -25,7 +25,6 @@ class Clips extends Component {
   componentDidMount() {
     this._isMounted = true
     this.getUserPeriod()
-    this.fetchClips()
   }
 
   componentWillUnmount() {
@@ -35,6 +34,7 @@ class Clips extends Component {
   async getUserPeriod() {
     const period = await localStorage.getItem('period') || this.initialPeriod
     this.setState({ period })
+    this.fetchClips()
   }
 
   async fetchClips(period = this.state.period) {
