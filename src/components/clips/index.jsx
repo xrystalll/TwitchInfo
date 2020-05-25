@@ -6,12 +6,13 @@ import Dropdown from 'react-dropdown';
 
 class Clips extends Component {
   _isMounted = false;
+  initialPeriod = 'week'
   constructor(props) {
     super();
     this.state = {
       login: props.login,
       clientId: props.clientId,
-      period: 'week',
+      period: this.initialPeriod,
       clips: [],
       noClipsData: false,
       limit: 10,
@@ -23,11 +24,17 @@ class Clips extends Component {
 
   componentDidMount() {
     this._isMounted = true
+    this.getUserPeriod()
     this.fetchClips()
   }
 
   componentWillUnmount() {
     this._isMounted = false
+  }
+
+  async getUserPeriod() {
+    const period = await localStorage.getItem('period') || this.initialPeriod
+    this.setState({ period })
   }
 
   async fetchClips(period = this.state.period) {
@@ -94,22 +101,27 @@ class Clips extends Component {
       case 'day':
         this.setState({ clips: [], noClipsData: false, period: 'day', cursor: '', loadMore: false })
         this.fetchClips('day')
+        localStorage.setItem('period', 'day')
         break
       case 'week':
         this.setState({ clips: [], noClipsData: false, period: 'week', cursor: '', loadMore: false })
         this.fetchClips('week')
+        localStorage.setItem('period', 'week')
         break
       case 'month':
         this.setState({ clips: [], noClipsData: false, period: 'month', cursor: '', loadMore: false })
         this.fetchClips('month')
+        localStorage.setItem('period', 'month')
         break
       case 'all':
         this.setState({ clips: [], noClipsData: false, period: 'all', cursor: '', loadMore: false })
         this.fetchClips('all')
+        localStorage.setItem('period', 'all')
         break
       default:
-        this.setState({ clips: [], noClipsData: false, period: 'week', cursor: '', loadMore: false })
-        this.fetchClips('week')
+        this.setState({ clips: [], noClipsData: false, period: this.initialPeriod, cursor: '', loadMore: false })
+        this.fetchClips(this.initialPeriod)
+        localStorage.setItem('period', this.initialPeriod)
     }
   }
 
@@ -124,6 +136,7 @@ class Clips extends Component {
     }, {
       value: 'all', label: 'Popular - all time'
     }]
+  
     return (
       <>
         <div className="period_toggle_wrap">

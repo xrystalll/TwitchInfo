@@ -102,6 +102,7 @@ class Channel extends Component {
 
   render() {
     const { profile, extendedInfo, stream, live, noProfileData } = this.state
+
     return (
       profile.length > 0 ? (
         <div>

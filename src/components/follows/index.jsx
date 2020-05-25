@@ -88,6 +88,7 @@ class Follows extends Component {
 
   render() {
     const { follows, noFollowsData, loadMore, loadMoreInProgress } = this.state
+
     return (
       <>
         {follows.length > 0 ? (
