@@ -1,5 +1,5 @@
 export const timeFormat = (timestamp) => {
-  if (!timestamp) timestamp = Date.now()
+  timestamp || (timestamp = Date.now())
   const time = new Date(timestamp).getTime()
   const d = new Date()
   const t = new Date(time)
@@ -37,7 +37,7 @@ export const counter = (count) => {
 }
 
 export const toHHMMSS = (sec) => {
-  if (!sec) sec = 0
+  sec || (sec = 0)
   const secNum = parseInt(sec, 10)
   let hours = Math.floor(secNum / 3600)
   const minutes = Math.floor((secNum - (hours * 3600)) / 60)

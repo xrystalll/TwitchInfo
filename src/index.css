@@ -572,6 +572,9 @@ i.live_dot {
 .channel_nav {
   background: var(--secondary-bg);
   padding: 16px;
+  transition: all .3s ease-out;
+  overflow-x: auto;
+  white-space: nowrap;
   user-select: none;
 }
 
@@ -579,6 +582,7 @@ i.live_dot {
   color: var(--main-text-color);
   padding: 8px 0 8px;
   margin-right: 16px;
+  text-transform: uppercase;
 }
 
 .nav_item.active {
@@ -589,6 +593,14 @@ i.live_dot {
 
 .nav_item:last-of-type {
   margin-right: 0;
+}
+
+.nav_sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 5px 16px 16px;
+  z-index: 9;
 }
 
 .follows_list {
@@ -1385,6 +1397,7 @@ i.live_dot {
 
 ::-webkit-scrollbar {
   width: 14px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-thumb {

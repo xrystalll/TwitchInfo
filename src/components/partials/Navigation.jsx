@@ -7,10 +7,10 @@ import Emotes from '../emotes';
 export const Navigation = ({ data }) => {
   return (
     <>
-      <div className="channel_nav">
-        <NavLink to={'/channel/' + data.login} exact className="nav_item">FOLLOWED CHANNELS</NavLink>
-        <NavLink to={'/channel/' + data.login + '/clips'} className="nav_item">CLIPS</NavLink>
-        <NavLink to={'/channel/' + data.login + '/emotes'} className="nav_item">EMOTES</NavLink>
+      <div className="channel_nav nav_sticky">
+        <NavLink to={'/channel/' + data.login} exact className="nav_item">Followed channels</NavLink>
+        <NavLink to={'/channel/' + data.login + '/clips'} className="nav_item">Clips</NavLink>
+        <NavLink to={'/channel/' + data.login + '/emotes'} className="nav_item">Emotes</NavLink>
       </div>
 
       <Switch>
