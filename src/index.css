@@ -25,6 +25,7 @@
   --default-transparent-02: rgba(0, 0, 0, .2);
   --default-transparent-06: rgba(0, 0, 0, .6);
   --default-transparent-08: rgba(0, 0, 0, .8);
+  --secondary-transparent-02: rgba(173, 173, 184, .2);
   --secondary-transparent-04: rgba(173, 173, 184, .4);
 }
 .light-theme {
@@ -41,6 +42,7 @@
   --secondary-color-light: #9e9e9e;
   --secondary-tint: #c3c3c3;
   --dark-monochrome: #000;
+  --secondary-transparent-02: rgba(18, 18, 18, .2);
   --secondary-transparent-04: rgba(18, 18, 18, .4);
 }
 * {
@@ -600,7 +602,7 @@ i.live_dot {
   top: 0;
   width: 100%;
   padding: 5px 16px 16px;
-  z-index: 9;
+  z-index: 10
 }
 
 .follows_list {
@@ -975,7 +977,8 @@ i.live_dot {
   height: 100%;
   top: 0;
   left: 0;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   z-index: 98;
 }
 
@@ -994,13 +997,53 @@ i.live_dot {
 }
 
 .modal .position {
-  width: calc(100% - 200px);
+  width: calc(100% - 162px);
   display: flex;
   margin: auto;
   z-index: 100;
 }
 
+.modal .next_clip, .modal .prev_clip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 200ms ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.modal .next_clip {
+  right: -34px
+}
+
+.modal .prev_clip {
+  left: -34px;
+}
+
+.modal .next_clip:hover, .modal .prev_clip:hover {
+  background: var(--secondary-transparent-02);
+  border-radius: 4px;
+}
+
+.modal .next_clip.disable, .modal .prev_clip.disable {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.modal .next_clip .next_clip_ic, .modal .prev_clip .prev_clip_ic {
+  width: 26px;
+  height: 26px;
+}
+
+.modal .next_clip_ic path, .modal .prev_clip_ic path {
+  fill: var(--light-monochrome);
+}
+
 .modal .body {
+  position: relative;
   min-width: 240px;
   transition: all .3s cubic-bezier(.25, .8, .25, 1) 0s;
   margin: auto;
@@ -1375,9 +1418,29 @@ i.live_dot {
   }
 }
 
+@media (max-width: 680px) {
+  .modal .position {
+    margin-top: 48px;
+  }
+  .modal .next_clip, .modal .prev_clip {
+    display: flex;
+    height: initial;
+    position: absolute;
+    top: -32px;
+  }
+  .modal .next_clip {
+    right: 0;
+    width: 50%;
+  }
+  .modal .prev_clip {
+    left: 0;
+    width: 50%;
+  }
+}
+
 @media (max-width: 1080px) {
   .modal .position {
-    width: calc(100% - 20px);
+    width: calc(100% - 70px);
   }
   .modal .body_width {
     width: 603px;

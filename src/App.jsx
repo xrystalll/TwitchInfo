@@ -6,6 +6,13 @@ import Channel from 'components/channel';
 import { NotFound } from 'components/error';
 
 class App extends Component {
+
+  componentDidMount() {
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-theme')
+    }
+  }
+
   render() {
     return (
       <Router>

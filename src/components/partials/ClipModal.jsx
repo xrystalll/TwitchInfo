@@ -24,6 +24,13 @@ export const ClipModal = ({ data }) => {
     <div className="modal open">
       <div className="position">
         <div className="body">
+
+          <div className="prev_clip" data-thisslug={data.slug}>
+            <svg className="prev_clip_ic" width="20" height="20" version="1.1" viewBox="0 0 20 20" x="0px" y="0px">
+              <path d="M13.5 14.5L9 10l4.5-4.5L12 4l-6 6 6 6 1.5-1.5z" />
+            </svg>
+          </div>
+
           <div className="body_flex">
             <div className={'body_width body_ratio_' + clipRatio}>
               <div className="body_bg">
@@ -131,6 +138,13 @@ export const ClipModal = ({ data }) => {
               </div>
             </div>
           </div>
+
+          <div className="next_clip" data-thisslug={data.slug}>
+            <svg className="next_clip_ic" width="20" height="20" version="1.1" viewBox="0 0 20 20" x="0px" y="0px">
+              <path d="M6.5 5.5L11 10l-4.5 4.5L8 16l6-6-6-6-1.5 1.5z" />
+            </svg>
+          </div>
+
         </div>
       </div>
       <div className="cover" />

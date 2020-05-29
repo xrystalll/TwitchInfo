@@ -33,7 +33,9 @@ class Clips extends Component {
 
   async getUserPeriod() {
     const period = await localStorage.getItem('period') || this.initialPeriod
-    this.setState({ period })
+    if (this._isMounted) {
+      this.setState({ period })
+    }
     this.fetchClips()
   }
 
@@ -150,7 +152,7 @@ class Clips extends Component {
         {clips.length > 0 ? (
           <div className="clips_list">
             {clips.map(item => (
-              <ClipItem key={item.slug} data={item} />
+              <ClipItem key={item.slug} data={item} clientId={this.state.clientId} />
             ))}
           </div>
         ) : (
