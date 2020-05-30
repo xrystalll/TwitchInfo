@@ -30,7 +30,8 @@ class ClipItem extends Component {
   }
 
   handleOutsideClick(e) {
-    if (e.target.className === 'cover' || e.target.className === 'position') {
+    const clickClass = e.target.className
+    if (clickClass === 'cover' || clickClass === 'position' || e.target.classList[0] === 'close_btn') {
       document.removeEventListener('click', this.handleOutsideClick, false)
       document.removeEventListener('keydown', this.handleKeyDown, false)
       document.removeEventListener('click', this.handleClickNext, false)
@@ -48,13 +49,9 @@ class ClipItem extends Component {
   }
 
   handleClickNext(e) {
-    if (
-      e.target.className === 'next_clip' ||
-      e.target.className.baseVal === 'next_clip_ic' ||
-      e.target.parentNode.className.baseVal === 'next_clip_ic'
-    ) {
-      const thisSlug = e.target.closest('.next_clip').dataset.thisslug
-      let nextClip = document.querySelector(`[data-slug="${thisSlug}"]`).nextSibling
+    if (e.target.classList[0] === 'next_btn') {
+
+      let nextClip = document.querySelector(`[data-slug="${this.state.slug}"]`).nextSibling
       if (!!nextClip && nextClip.classList[0] === 'modal') {
         nextClip = nextClip.nextSibling
       }
@@ -66,14 +63,10 @@ class ClipItem extends Component {
       } else {
         document.querySelector('.next_clip').classList.add('disable')
       }
-    } else if (
-      e.target.className === 'prev_clip' ||
-      e.target.className.baseVal === 'prev_clip_ic' ||
-      e.target.parentNode.className.baseVal === 'prev_clip_ic'
-    ) {
-      const thisSlug = e.target.closest('.prev_clip').dataset.thisslug
-      let prevClip = document.querySelector(`[data-slug="${thisSlug}"]`).previousSibling
 
+    } else if (e.target.classList[0] === 'prev_btn') {
+
+      let prevClip = document.querySelector(`[data-slug="${this.state.slug}"]`).previousSibling
       if (!!prevClip && prevClip.classList[0] === 'modal') {
         prevClip = prevClip.previousSibling
       }
@@ -85,6 +78,7 @@ class ClipItem extends Component {
       } else {
         document.querySelector('.prev_clip').classList.add('disable')
       }
+
     }
   }
 

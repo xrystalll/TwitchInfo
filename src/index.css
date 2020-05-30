@@ -887,6 +887,11 @@ i.live_dot {
   background: var(--main-control-bg);
   border-radius: 8px;
   padding-right: 12px;
+  transition: all .2s ease-in;
+}
+
+.period_toggle:hover {
+  background: var(--main-control-pressed);
 }
 
 .period_toggle svg path {
@@ -1003,29 +1008,49 @@ i.live_dot {
   z-index: 100;
 }
 
-.modal .next_clip, .modal .prev_clip {
+.clip_actions {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   position: absolute;
   top: 0;
+  right: -34px;
   height: 100%;
   transition: all 200ms ease;
-  cursor: pointer;
   user-select: none;
+  z-index: 1;
 }
 
 .modal .next_clip {
-  right: -34px
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms ease;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .modal .prev_clip {
   left: -34px;
+  right: initial !important;
+  transition: all 200ms ease;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.modal .next_clip:hover, .modal .prev_clip:hover {
-  background: var(--secondary-transparent-02);
+.modal .close_clip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms ease;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal .next_clip:hover, .modal .prev_clip:hover, .modal .close_clip:hover {
+  background: var(--secondary-transparent-02);
 }
 
 .modal .next_clip.disable, .modal .prev_clip.disable {
@@ -1033,18 +1058,23 @@ i.live_dot {
   opacity: 0;
 }
 
-.modal .next_clip .next_clip_ic, .modal .prev_clip .prev_clip_ic {
+.modal .clip_action_ic {
   width: 26px;
   height: 26px;
 }
 
-.modal .next_clip_ic path, .modal .prev_clip_ic path {
+.modal .next_clip .clip_action_ic {
+  position: relative;
+  top: -13px;
+}
+
+.modal .clip_action_ic path {
   fill: var(--light-monochrome);
 }
 
 .modal .body {
   position: relative;
-  min-width: 240px;
+  min-width: 220px;
   transition: all .3s cubic-bezier(.25, .8, .25, 1) 0s;
   margin: auto;
   box-shadow: var(--default-transparent-02) 0 1px 4px;
@@ -1420,21 +1450,32 @@ i.live_dot {
 
 @media (max-width: 680px) {
   .modal .position {
+    width: 100% !important;
     margin-top: 48px;
   }
-  .modal .next_clip, .modal .prev_clip {
+  .modal .clip_actions {
     display: flex;
     height: initial;
     position: absolute;
-    top: -32px;
+    top: -33px;
+  }
+  .modal .clip_actions.prev_clip {
+    left: 0;
+    width: 40%;
+  }
+  .modal .clip_actions {
+    right: 0;
+    width: 60%;
+    flex-direction: row-reverse;
   }
   .modal .next_clip {
-    right: 0;
-    width: 50%;
+    width: 70%;
   }
-  .modal .prev_clip {
-    left: 0;
-    width: 50%;
+  .modal .close_clip {
+    width: 30%;
+  }
+  .modal .next_clip .clip_action_ic {
+    top: initial;
   }
 }
 
@@ -1455,6 +1496,15 @@ i.live_dot {
   }
   .top .view_content .video {
     border-radius: 4px 4px 0 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .modal .body_ratio_16-9 {
+    width: 1380px;
+  }
+  .modal .body_ratio_3-2 {
+    width: 1220px;
   }
 }
 
