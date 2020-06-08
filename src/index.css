@@ -222,14 +222,17 @@ header {
 .input_text::placeholder {
   color: var(--main-control-color);
   opacity: 1;
+  user-select: none;
 }
 
 .input_text:-ms-input-placeholder {
   color: var(--main-control-color);
+  user-select: none;
 }
 
 .input_text::-ms-input-placeholder {
   color: var(--main-control-color);
+  user-select: none;
 }
 
 .btn, .btn_main {
@@ -455,7 +458,6 @@ article.container-profile-main {
   font-weight: 500 !important;
   line-height: 40px;
   display: inline-block;
-  float: initial !important;
 }
 
 .user-profile-content .social_info {
@@ -1387,6 +1389,50 @@ i.live_dot {
   padding: 0 8px;
   max-width: initial;
   z-index: 1;
+}
+
+.bans_title {
+  background: var(--secondary-bg);
+  padding: 10px 16px;
+}
+
+.bans_header {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  background: var(--secondary-tint);
+  padding: 10px 16px;
+}
+
+.bans_header .bans_grid_item {
+  color: var(--secondary-sub-color);
+}
+
+.ban_row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  background: var(--secondary-bg);
+  padding: 10px 16px;
+  transition: all .2s ease-in;
+}
+
+.ban_row:hover {
+  background: var(--secondary-sub-bg);
+}
+
+.api_copy {
+  background: var(--secondary-bg);
+  padding: 24px 16px;
+  font-size: 13px;
+  color: var(--secondary-sub-color);
+}
+
+.api_copy.zerolr {
+  padding: 24px 0;
+}
+
+.api_copy a {
+  color: var(--secondary-sub-color);
+  text-decoration: underline;
 }
 
 @media (max-width: 455px) {

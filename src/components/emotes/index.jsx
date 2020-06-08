@@ -9,9 +9,9 @@ class Emotes extends Component {
     super();
     this.state = {
       userId: props.userId,
-      'tier1': [],
-      'tier2': [],
-      'tier3': [],
+      tier1: [],
+      tier2: [],
+      tier3: [],
       noEmotesData: false
     }
   }
@@ -79,6 +79,11 @@ class Emotes extends Component {
               ))}
             </div>
           ) : null}
+          <div className="api_copy zerolr">
+            <a href="https://twitchemotes.com" target="_blank" rel="noopener noreferrer">
+              Data provided by Twitchemotes
+            </a>
+          </div>
         </div>
       ) : (
         !noEmotesData ? <Loader className="long" /> : <Error message="No emotes" />
