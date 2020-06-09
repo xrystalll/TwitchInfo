@@ -30,16 +30,16 @@ class Emotes extends Component {
       const data = await fetch('https://api.twitchemotes.com/api/v4/channels/' + this.state.userId)
       const res = await data.json()
 
-      if (this._isMounted) {
-        if (!res.error && res.emotes.length > 0) {
-          this.setState({
-            tier1: res.emotes.filter(i => i.emoticon_set === Number(res.plans['$4.99'])),
-            tier2: res.emotes.filter(i => i.emoticon_set === Number(res.plans['$9.99'])),
-            tier3: res.emotes.filter(i => i.emoticon_set === Number(res.plans['$24.99']))
-          })
-        } else {
-          this.setState({ noEmotesData: true })
-        }
+      if (!this._isMounted) return
+
+      if (!res.error && res.emotes.length > 0) {
+        this.setState({
+          tier1: res.emotes.filter(i => i.emoticon_set === Number(res.plans['$4.99'])),
+          tier2: res.emotes.filter(i => i.emoticon_set === Number(res.plans['$9.99'])),
+          tier3: res.emotes.filter(i => i.emoticon_set === Number(res.plans['$24.99']))
+        })
+      } else {
+        this.setState({ noEmotesData: true })
       }
     } catch(e) {
       this.setState({ noEmotesData: true })

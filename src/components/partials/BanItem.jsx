@@ -8,11 +8,10 @@ export const BanItem = ({ data }) => {
   return (
     <div className="ban_row">
       <div>
-        {duration > 0 ? (
-          duration + ' ' + declOfNum(duration, ['day', 'days', 'days'])
-        ) : (
-          durationHours + ' ' + declOfNum(durationHours, ['hour', 'hours', 'hours'])
-        )}
+        {duration > 0
+          ? duration + ' ' + declOfNum(duration, ['day', 'days', 'days'])
+          : durationHours + ' ' + declOfNum(durationHours, ['hour', 'hours', 'hours'])
+        }
       </div>
       <div>{timeFormat(data.created_at)}</div>
       <div>{timeFormat(data.updated_at)}</div>

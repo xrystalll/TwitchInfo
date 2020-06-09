@@ -32,10 +32,11 @@ class Clips extends Component {
   }
 
   async getUserPeriod() {
+    if (!this._isMounted) return
+
     const period = await localStorage.getItem('period') || this.initialPeriod
-    if (this._isMounted) {
-      this.setState({ period })
-    }
+
+    this.setState({ period })
     this.fetchClips()
   }
 
@@ -50,15 +51,15 @@ class Clips extends Component {
       })
       const res = await data.json()
 
-      if (this._isMounted) {
-        if (!res.error && res.clips.length > 0) {
-          this.setState({ clips: res.clips, cursor: res._cursor, loadMore: true })
-          if (res._cursor === '') {
-            this.setState({ loadMore: false, loadMoreInProgress: false })
-          }
-        } else {
-          this.setState({ noClipsData: true })
+      if (!this._isMounted) return
+
+      if (!res.error && res.clips.length > 0) {
+        this.setState({ clips: res.clips, cursor: res._cursor, loadMore: true })
+        if (res._cursor === '') {
+          this.setState({ loadMore: false, loadMoreInProgress: false })
         }
+      } else {
+        this.setState({ noClipsData: true })
       }
     } catch(e) {
       this.setState({ noClipsData: true })

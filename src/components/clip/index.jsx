@@ -37,12 +37,12 @@ class Clip extends Component {
       })
       const res = await data.json()
 
-      if (this._isMounted) {
-        if (!!res && !res.error) {
-          this.setState({ clip: [res] })
-        } else {
-          console.error('No clip data')
-        }
+      if (!this._isMounted) return
+
+      if (!!res && !res.error) {
+        this.setState({ clip: [res] })
+      } else {
+        console.error('No clip data')
       }
     } catch(e) {
       console.error(e)

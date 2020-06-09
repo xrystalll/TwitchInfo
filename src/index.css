@@ -42,7 +42,7 @@
   --secondary-color-light: #9e9e9e;
   --secondary-tint: #c3c3c3;
   --dark-monochrome: #000;
-  --secondary-transparent-02: rgba(18, 18, 18, .2);
+  --secondary-transparent-02: rgba(255, 255, 255, .2);
   --secondary-transparent-04: rgba(18, 18, 18, .4);
 }
 * {
@@ -428,7 +428,7 @@ article.container-profile-main {
 .user-profile-content .user-head div.user-info .info {
   margin-left: 20px;
   height: auto;
-  padding: 0px 0px 10px 10px;
+  padding: 0 0 10px 10px;
 }
 
 .user-profile-content .user-head div.user-info .uname {
@@ -601,7 +601,7 @@ i.live_dot {
 
 .nav_sticky {
   position: sticky;
-  top: 0;
+  top: -1px;
   width: 100%;
   padding: 5px 16px 16px;
   z-index: 10
@@ -993,7 +993,7 @@ i.live_dot {
   display: flex;
 }
 
-.cover {
+.modal .cover {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -1010,7 +1010,7 @@ i.live_dot {
   z-index: 100;
 }
 
-.clip_actions {
+.modal .clip_actions {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1399,6 +1399,7 @@ i.live_dot {
 .bans_header {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  grid-gap: 8px;
   background: var(--secondary-tint);
   padding: 10px 16px;
 }
@@ -1410,6 +1411,7 @@ i.live_dot {
 .ban_row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  grid-gap: 8px;
   background: var(--secondary-bg);
   padding: 10px 16px;
   transition: all .2s ease-in;
@@ -1432,7 +1434,9 @@ i.live_dot {
 
 .api_copy a {
   color: var(--secondary-sub-color);
-  text-decoration: underline;
+  text-decoration: underline var(--secondary-color-light);
+  text-decoration-skip-ink: none;
+  text-underline-position: under;
 }
 
 @media (max-width: 455px) {
@@ -1456,6 +1460,10 @@ i.live_dot {
   .clip_item {
     border-radius: 0;
     margin: 0;
+    padding-bottom: 8px;
+  }
+  .modal .body, .modal .body_bg, .top .view_content .video {
+    border-radius: 0 !important;
   }
 }
 
@@ -1463,14 +1471,14 @@ i.live_dot {
   .user-profile-content .user-head div.user-info {
     text-align: center;
     display: block;
-    padding: 0px 15px 55px;
+    padding: 0 15px 55px;
   }
   .user-profile-content .user-head div.user-info .avatar {
     margin: auto;
   }
   .user-profile-content .user-head div.user-info .info {
     margin: 30px 0 0;
-    padding: 0px 20px 10px;
+    padding: 0 20px 10px;
   }
   .user-profile-content .user-head div.user-info .uname .display_name {
     justify-content: center;
@@ -1497,22 +1505,26 @@ i.live_dot {
 @media (max-width: 680px) {
   .modal .position {
     width: 100% !important;
-    margin-top: 48px;
+    margin-top: 0;
   }
   .modal .clip_actions {
     display: flex;
     height: initial;
     position: absolute;
-    top: -33px;
+    top: initial;
+    bottom: -42px;
+    right: 0;
+    width: 60%;
+    flex-direction: row-reverse;
+    margin-bottom: 8px;
+  }
+  .modal.open::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
   .modal .clip_actions.prev_clip {
     left: 0;
     width: 40%;
-  }
-  .modal .clip_actions {
-    right: 0;
-    width: 60%;
-    flex-direction: row-reverse;
   }
   .modal .next_clip {
     width: 70%;

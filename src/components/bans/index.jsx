@@ -28,12 +28,12 @@ class Bans extends Component {
       const data = await fetch('https://api.streamerbans.com/api/v1/users/' + this.state.login)
       const res = await data.json()
 
-      if (this._isMounted) {
-        if (res?.data?.bans?.length > 0) {
-          this.setState({ bans: res.data.bans })
-        } else {
-          this.setState({ noBansData: true })
-        }
+      if (!this._isMounted) return
+
+      if (res?.data?.bans?.length > 0) {
+        this.setState({ bans: res.data.bans })
+      } else {
+        this.setState({ noBansData: true })
       }
     } catch(e) {
       this.setState({ noBansData: true })
@@ -42,7 +42,7 @@ class Bans extends Component {
   }
 
   render() {
-    const { bans, noBansData} = this.state
+    const { bans, noBansData } = this.state
 
     return (
       bans.length > 0 ? (
@@ -53,7 +53,7 @@ class Bans extends Component {
             <div className="bans_grid_item">From</div>
             <div className="bans_grid_item">To</div>
           </div>
-          {bans.map(item => (
+          {bans.reverse().map(item => (
             <BanItem key={item.id} data={item} />
           ))}
           <div className="api_copy">

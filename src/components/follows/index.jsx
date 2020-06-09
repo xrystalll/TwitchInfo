@@ -39,12 +39,16 @@ class Follows extends Component {
       })
       const res = await data.json()
 
-      if (this._isMounted) {
-        if (!res.error && res.follows.length > 0) {
-          this.setState({ follows: res.follows, offset: this.state.offset + this.state.limit, loadMore: true })
-        } else {
-          this.setState({ noFollowsData: true })
-        }
+      if (!this._isMounted) return
+
+      if (!res.error && res.follows.length > 0) {
+        this.setState({
+          follows: res.follows,
+          offset: this.state.offset + this.state.limit,
+          loadMore: true
+        })
+      } else {
+        this.setState({ noFollowsData: true })
       }
     } catch(e) {
       this.setState({ noFollowsData: true })

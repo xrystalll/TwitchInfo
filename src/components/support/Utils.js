@@ -1,5 +1,4 @@
-export const timeFormat = (timestamp) => {
-  timestamp || (timestamp = Date.now())
+export const timeFormat = (timestamp = Date.now()) => {
   const time = new Date(timestamp).getTime()
   const d = new Date()
   const t = new Date(time)
@@ -28,16 +27,14 @@ export const timeFormat = (timestamp) => {
   }
 }
 
-export const counter = (count) => {
-  if (!count || count === 0) return 0
+export const counter = (count = 0) => {
   if (count < 1e3) return count
   if (count >= 1e3 && count < 1e6) return `${+(count / 1e3).toFixed(1)}K`
   if (count >= 1e6 && count < 1e9) return `${+(count / 1e6).toFixed(1)}M`
   if (count >= 1e9 && count < 1e12) return `${+(count / 1e9).toFixed(1)}B`
 }
 
-export const toHHMMSS = (sec) => {
-  sec || (sec = 0)
+export const toHHMMSS = (sec = 0) => {
   const secNum = parseInt(sec, 10)
   let hours = Math.floor(secNum / 3600)
   const minutes = Math.floor((secNum - (hours * 3600)) / 60)
@@ -49,7 +46,7 @@ export const toHHMMSS = (sec) => {
   return hours + minutes + ':' + seconds
 }
 
-export const convertMiliseconds = (miliseconds, format) => {
+export const convertMiliseconds = (miliseconds = Date.now(), format) => {
   const total_seconds = parseInt(Math.round(miliseconds / 1000))
   const total_minutes = parseInt(Math.round(total_seconds / 60))
   const total_hours = parseInt(Math.round(total_minutes / 60))
@@ -73,7 +70,7 @@ export const convertMiliseconds = (miliseconds, format) => {
   }
 }
 
-export const declOfNum = (number, titles) => {
+export const declOfNum = (number = 0, titles = ['', '', '']) => {
   const cases = [2, 0, 1, 1, 1, 2]
   return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]]
 }
