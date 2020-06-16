@@ -685,13 +685,15 @@ i.live_dot {
 .foot_center {
   display: flex;
   justify-content: center;
-  margin: 16px;
+  margin: 16px 8px;
 }
 
 .load_more {
-  width: 160px;
+  width: initial;
+  min-width: 200px;
   height: 36px;
-  border-radius: 50px;
+  border-radius: 8px;
+  padding: 0 16px;
   font-weight: 500;
   white-space: nowrap;
   display: flex;
@@ -909,6 +911,7 @@ i.live_dot {
   overflow: hidden;
   display: flex;
   align-items: center;
+  min-width: 160px;
   width: max-content;
   padding: 6px 16px;
   text-transform: capitalize;
@@ -922,10 +925,10 @@ i.live_dot {
   border-radius: 8px;
   max-height: 200px;
   min-width: 188px;
+  width: calc(100% + 32px);
   overflow-y: auto;
   position: absolute;
   top: -4px;
-  width: max-content;
   -webkit-overflow-scrolling: touch;
   user-select: none;
   z-index: 9;
@@ -1491,6 +1494,12 @@ i.live_dot {
   }
   .clips_list {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .foot_center {
+    margin: 16px;
+  }
+  .load_more {
+    width: 100%;
   }
   .track-vertical {
     width: 4px !important;

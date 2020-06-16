@@ -152,8 +152,8 @@ class Clips extends Component {
         </div>
         {clips.length > 0 ? (
           <div className="clips_list">
-            {clips.map(item => (
-              <ClipItem key={item.slug} data={item} clientId={this.state.clientId} />
+            {clips.map((item, index) => (
+              <ClipItem key={index} data={item} clientId={this.state.clientId} />
             ))}
           </div>
         ) : (
