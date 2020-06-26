@@ -1607,3 +1607,23 @@ i.live_dot {
   cursor: pointer;
   user-select: none;
 }
+
+.theme_toggle {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  margin: 12px 0 12px auto;
+  width: max-content;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme_toggle svg path {
+  fill: var(--light-monochrome);
+}
+
+.theme_toggle span {
+  margin-left: 8px;
+  line-height: 20px;
+  color: var(--light-monochrome);
+}

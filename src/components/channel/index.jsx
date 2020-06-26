@@ -26,7 +26,7 @@ class Channel extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.login !== this.props.match.params.login) {
+    if (prevProps.match.params.login.toLowerCase() !== this.props.match.params.login.toLowerCase()) {
       this.setState(this.initialState)
       this.fetchProfile()
     }
@@ -34,7 +34,7 @@ class Channel extends Component {
 
   async fetchProfile() {
     try {
-      const data = await fetch('https://api.twitch.tv/kraken/users?login=' + this.props.match.params.login, {
+      const data = await fetch('https://api.twitch.tv/kraken/users?login=' + this.props.match.params.login.toLowerCase(), {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.twitchtv.v5+json',

@@ -10,7 +10,7 @@ const Header = () => {
       input.classList.add('error')
     } else {
       input.classList.remove('error')
-      history.push('/channel/' + input.value)
+      history.push('/channel/' + input.value.toLowerCase())
       input.value = ''
     }
   }
@@ -22,7 +22,7 @@ const Header = () => {
         input.classList.add('error')
       } else {
         input.classList.remove('error')
-        history.push('/channel/' + input.value)
+        history.push('/channel/' + input.value.toLowerCase())
         input.value = ''
       }
     }
