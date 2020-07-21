@@ -56,8 +56,8 @@ class Channel extends Component {
     }
   }
 
-  getChannel(id = this.state.userId) {
-    fetch('https://api.twitch.tv/kraken/channels/' + id, {
+  getChannel() {
+    fetch('https://api.twitch.tv/kraken/channels/' + this.state.userId, {
       method: 'GET',
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
@@ -85,7 +85,23 @@ class Channel extends Component {
       .then(response => response.json())
       .then(data => {
         if (!data.error && data.stream !== null) {
-          this.setState({ stream: data.stream, live: true })
+          this.setState({
+            stream: {
+              live: true,
+              url: data.stream.channel.url,
+              preview: {
+                large: data.stream.preview.large,
+                medium: data.stream.preview.medium,
+                small: data.stream.preview.small
+              },
+              views: data.stream.viewers,
+              game: data.stream.game,
+              created_at: data.stream.created_at,
+              title: data.stream.channel.status,
+              duration: 0
+            },
+            live: true
+          })
         } else {
           if (this.state.live === false) return
 
@@ -105,7 +121,12 @@ class Channel extends Component {
       profile.length > 0 ? (
         <div>
           <Profile data={profile} extended={extendedInfo} />
-          {live ? <StreamItem data={stream} /> : null}
+          {live ? (
+            <div className="stream_container">
+              <div className="live_title">Live stream</div>
+              <StreamItem data={stream} />
+            </div>
+          ) : null}
           <Navigation data={{
             clientId: this.state.clientId,
             userId: profile[0]._id,

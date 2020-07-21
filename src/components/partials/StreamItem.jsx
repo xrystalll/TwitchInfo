@@ -1,30 +1,34 @@
 import React from 'react';
-import { timeFormat, counter } from '../support/Utils';
+import { timeFormat, counter, toHHMMSS } from '../support/Utils';
 
 export const StreamItem = ({ data }) => {
   return (
-    <div className="stream_container">
-      <div className="live_title">Live stream</div>
-      <div className="stream_item">
-        <a href={data.channel.url} target="_blank" rel="noopener noreferrer">
-          <div className="clip_thumb" style={{ 'backgroundImage': `url(${data.preview.large})` }}>
+    <div className={data.live ? 'stream_item' : 'clip_item'}>
+      <a href={data.url} target="_blank" rel="noopener noreferrer">
+        <div className="clip_thumb" style={{ 'backgroundImage': `url(${data.preview.large})` }}>
+          {data.live ? (
             <div className="clip_stat">
               <span className="live">
                 <i className="live_dot"></i>
                 Live
               </span>
-              <span>{counter(data.viewers)} viewers</span>
+              <span>{counter(data.views)} viewers</span>
             </div>
-          </div>
-          <div className="stream_header">
-            <div className="clip_header_top">
-              <span>{data.game}</span>
-              <span>Started {timeFormat(data.created_at)}</span>
+          ) : (
+            <div className="clip_stat">
+              <span>{counter(data.views)} views</span>
+              <span>{toHHMMSS(data.duration)}</span>
             </div>
-            <h4 className="clip_title">{data.channel.status}</h4>
+          )}
+        </div>
+        <div className="stream_header">
+          <div className="clip_header_top">
+            <span>{data.game}</span>
+            <span>{data.live ? 'Started ' : ''}{timeFormat(data.created_at)}</span>
           </div>
-        </a>
-      </div>
+          <h4 className="clip_title">{data.title}</h4>
+        </div>
+      </a>
     </div>
   )
 }
