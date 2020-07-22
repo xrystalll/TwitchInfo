@@ -13,7 +13,7 @@ class Channel extends Component {
       clientId: 'ce4n64ldb15801hbrrz06vpq5dbain',
       profile: [],
       extendedInfo: [],
-      stream: [],
+      stream: {},
       live: false,
       noProfileData: false
     }
@@ -109,8 +109,10 @@ class Channel extends Component {
         }
       })
       .catch(e => {
-        this.setState({ live: false })
         console.error(e)
+        if (this.state.live === false) return
+
+        this.setState({ live: false })
       })
   }
 
@@ -134,7 +136,7 @@ class Channel extends Component {
           }} />
         </div>
       ) : (
-        !noProfileData ? <Loader className="full" size="32" /> : <Error message="Nothing! Try another username" />
+        !noProfileData ? <Loader className="full" size="32" /> : <Error message="Nothing! Try another username" className="full" />
       )
     )
   }

@@ -270,6 +270,10 @@ main .input_text, main .btn_main {
   height: 200px;
 }
 
+.empty-results.full {
+  height: calc(100vh - 56px);
+}
+
 .empty-results svg .path_info {
   fill: var(--secondary-color-light);
 }
@@ -304,7 +308,7 @@ main .input_text, main .btn_main {
 }
 
 .content_loader.full {
-  height: 100vh;
+  height: calc(100vh - 56px);
   margin: 0;
 }
 
@@ -778,6 +782,7 @@ i.live_dot {
 }
 
 .clip_title {
+  margin-top: 10px;
   font-size: 18px;
   font-weight: 400;
   word-break: break-word;
@@ -786,7 +791,6 @@ i.live_dot {
 .clip_author {
   color: var(--secondary-color-light);
   font-size: 14px;
-  margin-bottom: 10px;
 }
 
 .clip_author a {
@@ -1456,6 +1460,9 @@ i.live_dot {
   }
   .main_head {
     max-width: 310px;
+  }
+  .nav_item {
+    margin-right: 14px;
   }
 }
 

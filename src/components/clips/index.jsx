@@ -32,9 +32,9 @@ class Clips extends Component {
   }
 
   async getUserPeriod() {
-    if (!this._isMounted) return
-
     const period = await localStorage.getItem('period') || this.initialPeriod
+
+    if (!this._isMounted) return
 
     this.setState({ period })
     this.fetchClips()

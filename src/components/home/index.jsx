@@ -1,45 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Home = () => {
   document.title = 'Get Twitch account info'
   const history = useHistory()
 
+  const [error, setError] = useState(false)
+
+  const isError = error ? ' error' : ''
+
   const getUser = (e) => {
     const input = e.currentTarget.parentNode.children[0]
-    if (!input.value.trim().length) {
-      input.classList.add('error')
+    if (input.value.trim().length) {
+      history.push('/channel/' + input.value.trim().toLowerCase())
+      if (error === false) return
+
+      setError(false)
     } else {
-      input.classList.remove('error')
-      history.push('/channel/' + input.value.toLowerCase())
+      setError(true)
     }
   }
 
   const getUserByEnter = (e) => {
     if (e.key === 'Enter') {
       const input = e.currentTarget
-      if (!input.value.trim().length) {
-        input.classList.add('error')
+      if (input.value.trim().length) {
+        history.push('/channel/' + input.value.trim().toLowerCase())
+        if (error === false) return
+
+        setError(false)
       } else {
-        input.classList.remove('error')
-        history.push('/channel/' + input.value.toLowerCase())
+        setError(true)
       }
     }
   }
 
   const validateInput = (e) => {
     const input = e.currentTarget
-    if (!input.value.trim().length) {
-      input.classList.add('error')
+    if (input.value.trim().length) {
+      if (error === false) return
+
+      setError(false)
     } else {
-      input.classList.remove('error')
+      setError(true)
     }
   }
 
-  const loseFocus = (e) => {
-    const input = e.currentTarget
-    if (input.classList.contains('error')) {
-      input.classList.remove('error')
+  const loseFocus = () => {
+    if (error === true) {
+      setError(false)
     }
   }
 
@@ -64,10 +73,10 @@ const Home = () => {
           </div>
           <div className="main_form">
             <input
+              onBlur={loseFocus}
               onChange={validateInput.bind(this)}
-              onBlur={loseFocus.bind(this)}
               onKeyDown={getUserByEnter.bind(this)}
-              className="login_main input_text"
+              className={'login_main input_text' + isError}
               type="text"
               placeholder="Enter username"
             />
