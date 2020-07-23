@@ -139,14 +139,14 @@ class Clips extends Component {
     }, {
       value: 'all', label: 'Popular - all time'
     }]
-  
+
     return (
       <>
         <div className="period_toggle_wrap">
           <div className="period_toggle">
             <Dropdown options={periods} onChange={this.changePreiod.bind(this)} value={periods.find(i => i.value === period)} />
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px">
-              <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" fill="#EFEFF1" />
+              <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" />
             </svg>
           </div>
         </div>

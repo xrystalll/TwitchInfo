@@ -27,6 +27,7 @@
   --default-transparent-08: rgba(0, 0, 0, .8);
   --secondary-transparent-02: rgba(173, 173, 184, .2);
   --secondary-transparent-04: rgba(173, 173, 184, .4);
+  --invert: 0;
 }
 .light-theme {
   --main-bg: #e0e0e0;
@@ -44,6 +45,7 @@
   --dark-monochrome: #000;
   --secondary-transparent-02: rgba(255, 255, 255, .2);
   --secondary-transparent-04: rgba(18, 18, 18, .4);
+  --invert: 1;
 }
 * {
   outline: none;
@@ -975,6 +977,7 @@ i.live_dot {
   right: 13px;
   width: 18px;
   height: 18px;
+  filter: invert(var(--invert));
 }
 
 .Dropdown-noresults {

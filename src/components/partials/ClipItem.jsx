@@ -101,7 +101,7 @@ class ClipItem extends Component {
           </div>
           <div className="clip_header">
             <div className="clip_header_top">
-              <span>{data.game}</span>
+              {data.game.length > 0 ? <span>{data.game}</span> : null}
               <span>{timeFormat(data.created_at)}</span>
             </div>
             {!!data.curator ? (

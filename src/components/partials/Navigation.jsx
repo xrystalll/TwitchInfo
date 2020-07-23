@@ -11,7 +11,7 @@ export const Navigation = ({ data }) => {
     <>
       <div className="channel_nav nav_sticky">
         <NavLink to={'/channel/' + data.login} exact className="nav_item">Videos</NavLink>
-        <NavLink to={'/channel/' + data.login + '/followed'} exact className="nav_item">Followed</NavLink>
+        <NavLink to={'/channel/' + data.login + '/followed'} className="nav_item">Followed</NavLink>
         <NavLink to={'/channel/' + data.login + '/clips'} className="nav_item">Clips</NavLink>
         <NavLink to={'/channel/' + data.login + '/emotes'} className="nav_item">Emotes</NavLink>
         <NavLink to={'/channel/' + data.login + '/bans'} className="nav_item">Bans</NavLink>
