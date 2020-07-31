@@ -23,8 +23,8 @@ export const StreamItem = ({ data }) => {
         </div>
         <div className="stream_header">
           <div className="clip_header_top">
-            {data.game.length > 0 ? <span>{data.game}</span> : null}
-            <span>{data.live ? 'Started ' : ''}{timeFormat(data.created_at)}</span>
+            {data.game.length > 0 && <span>{data.game}</span>}
+            <span>{data.live && 'Started '}{timeFormat(data.created_at)}</span>
           </div>
           <h4 className="clip_title">{data.title}</h4>
         </div>

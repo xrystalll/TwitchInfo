@@ -14,11 +14,11 @@ export const FollowItem = (props) => {
       <div className="follow_item_right">
         <div className="follow_name">
           {data.display_name}
-          {data.partner ? (
+          {data.partner && (
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20">
               <path fillRule="evenodd" clipRule="evenodd" d="M10 2l6 2 2 6-2 6-6 2-6-2-2-6 2-6 6-2zM8.889 13.636l5.43-5.429-1.415-1.414-4.015 4.015-2.015-2.015-1.414 1.414 3.429 3.43z" fill="#9147ff" />
             </svg>
-          ) : null}
+          )}
         </div>
         <div className="follow_date">
           Followed from {timeFormat(props.data.created_at)}
@@ -33,8 +33,8 @@ export const FollowItem = (props) => {
           )}
         </div>
         <div className="follow_tags">
-          {data.game ? <span className="follow_tag">{data.game}</span> : null}
-          {data.language ? <span className="follow_tag">{data.language}</span> : null}
+          {data.game && <span className="follow_tag">{data.game}</span>}
+          {data.language && <span className="follow_tag">{data.language}</span>}
         </div>
       </div>
     </Link>

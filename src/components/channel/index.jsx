@@ -123,12 +123,12 @@ class Channel extends Component {
       profile.length > 0 ? (
         <div>
           <Profile data={profile} extended={extendedInfo} />
-          {live ? (
+          {live && (
             <div className="stream_container">
               <div className="live_title">Live stream</div>
               <StreamItem data={stream} />
             </div>
-          ) : null}
+          )}
           <Navigation data={{
             clientId: this.state.clientId,
             userId: profile[0]._id,

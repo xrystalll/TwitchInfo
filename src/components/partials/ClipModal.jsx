@@ -66,7 +66,7 @@ export const ClipModal = ({ data }) => {
                                   <div className="created_time">{data.game}</div>
                                 </div>
 
-                                {'clipboard' in navigator ? (
+                                {'clipboard' in navigator && (
                                   <div
                                     onClick={copyText.bind(this, data.url.replace('?tt_medium=clips_api&tt_content=url', ''))}
                                     className={'clip_action_share' + isCopied}
@@ -83,7 +83,7 @@ export const ClipModal = ({ data }) => {
                                       </svg>
                                     )}
                                   </div>
-                                ) : null}
+                                )}
                               </div>
 
                             </div>
@@ -100,19 +100,19 @@ export const ClipModal = ({ data }) => {
                               <h4 className="clip_title">{data.title}</h4>
                               <div className="clip_info_created">
                                 <div className="clip_info_time">{timeFormat(data.created_at)}</div>
-                                {!!data.curator ? (
+                                {!!data.curator && (
                                   <div className="clip_info_author">
                                     Clipped by
                                     <Link to={'/channel/' + data.curator.name}>{data.curator.display_name}</Link>
                                   </div>
-                                ) : null}
+                                )}
                               </div>
                             </div>
 
                             <div className="clip_bottom">
-                              {vodExist ? (
+                              {vodExist && (
                                 <a className="btn clip_full" href={data.vod.url} target="_blank" rel="noopener noreferrer">Watch full video</a>
-                              ) : null}
+                              )}
                               <a
                                 title="Download clip"
                                 className={`btn clip_download${vodExist ? ' short' : ''}`}
@@ -124,7 +124,7 @@ export const ClipModal = ({ data }) => {
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                                   <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
                                 </svg>
-                                {!vodExist ? <span>Download clip</span> : null}
+                                {!vodExist && <span>Download clip</span>}
                               </a>
                             </div>
 

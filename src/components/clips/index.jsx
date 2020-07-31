@@ -159,7 +159,7 @@ class Clips extends Component {
         ) : (
           !noClipsData ? <Loader className="long" /> : <Error message="No clips" />
         )}
-        {loadMore ? (
+        {loadMore && (
           <div className="foot_center">
             <div onClick={this.loadMoreClips.bind(this)} className="load_more">
               {loadMoreInProgress ? (
@@ -169,7 +169,7 @@ class Clips extends Component {
               ) : <span className="more_text">Load more clips</span>}
             </div>
           </div>
-        ) : null}
+        )}
       </>
     )
   }

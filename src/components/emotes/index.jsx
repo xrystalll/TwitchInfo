@@ -53,32 +53,32 @@ class Emotes extends Component {
     return (
       tier1.length > 0 || tier2.length > 0 || tier3.length > 0 ? (
         <div className="emotes">
-          {tier1.length > 0 ? (
+          {tier1.length > 0 && (
             <div className="emote_grid">
               <h4 className="tier_title">Tier 1 subscriber emotes</h4>
               {tier1.map(item => (
                 <EmoteItem key={item.id} data={{ id: item.id, code: item.code }} />
               ))}
             </div>
-          ) : null}
+          )}
 
-          {tier2.length > 0 ? (
+          {tier2.length > 0 && (
             <div className="emote_grid">
               <h4 className="tier_title">Tier 2 subscriber emotes</h4>
               {tier2.map(item => (
                 <EmoteItem key={item.id} data={{ id: item.id, code: item.code }} />
               ))}
             </div>
-          ) : null}
+          )}
 
-          {tier3.length > 0 ? (
+          {tier3.length > 0 && (
             <div className="emote_grid">
               <h4 className="tier_title">Tier 3 subscriber emotes</h4>
               {tier3.map(item => (
                 <EmoteItem key={item.id} data={{ id: item.id, code: item.code }} />
               ))}
             </div>
-          ) : null}
+          )}
           <div className="api_copy zerolr">
             <a href="https://twitchemotes.com" target="_blank" rel="noopener noreferrer">
               Data provided by Twitchemotes

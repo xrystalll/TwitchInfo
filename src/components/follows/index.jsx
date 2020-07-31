@@ -104,7 +104,7 @@ class Follows extends Component {
         ) : (
           !noFollowsData ? <Loader className="long" /> : <Error message="No follows" />
         )}
-        {loadMore ? (
+        {loadMore && (
           <div className="foot_center">
             <div onClick={this.loadMoreFollows.bind(this)} className="load_more">
               {loadMoreInProgress ? (
@@ -114,7 +114,7 @@ class Follows extends Component {
               ) : <span className="more_text">Load more follows</span>}
             </div>
           </div>
-        ) : null}
+        )}
       </>
     )
   }
