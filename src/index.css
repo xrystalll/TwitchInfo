@@ -54,6 +54,7 @@
   text-decoration: none;
   margin: 0;
   padding: 0;
+  transition: background .2s ease-in;
 }
 ::selection {
   color: var(--selection-color);
@@ -347,7 +348,7 @@ article.container-profile-main {
   font-weight: normal;
   font-size: 14px;
   border: 0;
-  transition: all 0.3s;
+  transition: all .2s;
   border-radius: 24px;
   cursor: pointer;
 }
@@ -406,6 +407,7 @@ article.container-profile-main {
   background-color: var(--secondary-bg);
   -webkit-transform: rotate(2deg);
   transform: rotate(2deg);
+  transition: background .2s ease-in;
   z-index: 1;
 }
 
@@ -586,7 +588,6 @@ i.live_dot {
 .channel_nav {
   background: var(--secondary-bg);
   padding: 16px;
-  transition: all .3s ease-out;
   overflow-x: auto;
   white-space: nowrap;
   user-select: none;
@@ -712,7 +713,6 @@ i.live_dot {
   color: var(--main-text-color);
   background: var(--secondary-bg);
   box-shadow: var(--default-transparent-01) 0 2px 4px;
-  transition: all .3s ease-out;
   user-select: none;
   cursor: pointer;
   z-index: 2;
@@ -901,7 +901,6 @@ i.live_dot {
   background: var(--main-control-bg);
   border-radius: 8px;
   padding-right: 12px;
-  transition: all .2s ease-in;
 }
 
 .period_toggle:hover {
@@ -925,7 +924,6 @@ i.live_dot {
   width: max-content;
   padding: 6px 16px;
   text-transform: capitalize;
-  transition: all 200ms ease;
   cursor: pointer;
   user-select: none;
 }
@@ -1033,7 +1031,7 @@ i.live_dot {
   top: 0;
   right: -34px;
   height: 100%;
-  transition: all 200ms ease;
+  transition: all .2s ease;
   user-select: none;
   z-index: 1;
 }
@@ -1043,7 +1041,7 @@ i.live_dot {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 200ms ease;
+  transition: all .2s ease;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -1051,7 +1049,7 @@ i.live_dot {
 .modal .prev_clip {
   left: -34px;
   right: initial !important;
-  transition: all 200ms ease;
+  transition: all .2s ease;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -1060,7 +1058,7 @@ i.live_dot {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 200ms ease;
+  transition: all .2s ease;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -1091,7 +1089,7 @@ i.live_dot {
 .modal .body {
   position: relative;
   min-width: 220px;
-  transition: all .3s cubic-bezier(.25, .8, .25, 1) 0s;
+  transition: all .2s cubic-bezier(.25, .8, .25, 1) 0s;
   margin: auto;
   box-shadow: var(--default-transparent-02) 0 1px 4px;
   border-radius: 4px;
@@ -1515,6 +1513,10 @@ i.live_dot {
   .load_more {
     width: 100%;
   }
+  .theme_toggle.themed {
+    margin: 36px 16px 12px auto !important;
+    padding: 4px 4px;
+  }
   .track-vertical {
     width: 4px !important;
     right: 2px;
@@ -1640,4 +1642,16 @@ i.live_dot {
   margin-left: 8px;
   line-height: 20px;
   color: var(--light-monochrome);
+}
+
+.theme_toggle.themed {
+  margin: 36px 0 12px auto;
+}
+
+.theme_toggle.themed svg path {
+  fill: var(--dark-monochrome);
+}
+
+.theme_toggle.themed span {
+  color: var(--dark-monochrome);
 }

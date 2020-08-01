@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import CustomScrollbar from './CustomScrollbar';
 import Header from '../partials/Header';
+import { ThemeToggle } from '../partials/ThemeToggle';
 
 const ChannelRoute = ({ component: Component, ...rest }) => {
   return (
@@ -15,6 +16,7 @@ const ChannelRoute = ({ component: Component, ...rest }) => {
             <section className="content">
               <div className="container">
                 <Component {...props} />
+                <ThemeToggle className="themed" />
               </div>
             </section>
           </CustomScrollbar>

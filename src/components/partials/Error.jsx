@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Error = ({ message = '', className = '' }) => {
+export const Error = ({ message = 'Error', className }) => {
   const size = 112
 
   return (

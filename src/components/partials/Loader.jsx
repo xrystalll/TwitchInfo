@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Loader = ({ className = '', size }) => {
+export const Loader = ({ className, size }) => {
   return (
     <div className={`content_loader ${className || ''}`}>
       <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
