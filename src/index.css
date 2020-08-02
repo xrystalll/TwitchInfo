@@ -200,6 +200,7 @@ header {
 
 .tw-glitch-logo__face {
   fill: var(--secondary-bg);
+  transition: fill .2s ease-in;
 }
 
 .input_text {
@@ -338,33 +339,6 @@ article.container-profile-main {
   padding: 0;
 }
 
-.butt {
-  display: inline-block;
-}
-
-.user-info .butt {
-  margin: 15px 13px 0 0;
-  padding: 6px 25px;
-  font-weight: normal;
-  font-size: 14px;
-  border: 0;
-  transition: all .2s;
-  border-radius: 24px;
-  cursor: pointer;
-}
-
-.user-info .butt_links {
-  color: var(--dark-monochrome);
-  line-height: 25px;
-}
-
-.user-info .butt_links i {
-  margin-right: 8px;
-  font-size: 20px;
-  vertical-align: text-bottom;
-  line-height: 17px;
-}
-
 .img-circle {
   border-radius: 50%;
 }
@@ -423,6 +397,7 @@ article.container-profile-main {
 .user-profile-content .user-head div.user-info .avatar {
   width: 150px;
   height: 150px;
+  display: table;
 }
 
 .user-profile-content .user-head div.user-info .avatar img {
@@ -466,6 +441,8 @@ article.container-profile-main {
   font-weight: 500 !important;
   line-height: 40px;
   display: inline-block;
+  word-break: break-word;
+  max-width: 400px;
 }
 
 .user-profile-content .social_info {

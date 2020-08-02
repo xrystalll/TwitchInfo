@@ -11,28 +11,28 @@ class ClipItem extends Component {
       open: false,
       slug: ''
     }
-    this.handleOutsideClick = this.handleOutsideClick.bind(this)
+    this.handleCloseModal = this.handleCloseModal.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleClickNext = this.handleClickNext.bind(this)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.handleOutsideClick, false)
+    document.removeEventListener('click', this.handleCloseModal, false)
     document.removeEventListener('keydown', this.handleKeyDown, false)
     document.removeEventListener('click', this.handleClickNext, false)
   }
 
   openModal(slug) {
-    document.addEventListener('click', this.handleOutsideClick, false)
+    document.addEventListener('click', this.handleCloseModal, false)
     document.addEventListener('keydown', this.handleKeyDown, false)
     document.addEventListener('click', this.handleClickNext, false)
     this.setState({ open: true, slug })
   }
 
-  handleOutsideClick(e) {
+  handleCloseModal(e) {
     const clickClass = e.target.className
     if (clickClass === 'cover' || clickClass === 'position' || e.target.classList[0] === 'close_btn') {
-      document.removeEventListener('click', this.handleOutsideClick, false)
+      document.removeEventListener('click', this.handleCloseModal, false)
       document.removeEventListener('keydown', this.handleKeyDown, false)
       document.removeEventListener('click', this.handleClickNext, false)
       this.setState({ open: false })
@@ -41,7 +41,7 @@ class ClipItem extends Component {
 
   handleKeyDown(e) {
     if (e.keyCode === 27) {
-      document.removeEventListener('click', this.handleOutsideClick, false)
+      document.removeEventListener('click', this.handleCloseModal, false)
       document.removeEventListener('keydown', this.handleKeyDown, false)
       document.removeEventListener('click', this.handleClickNext, false)
       this.setState({ open: false })
