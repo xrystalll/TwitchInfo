@@ -1,9 +1,18 @@
 {
+  "homepage": "https://xrystalll.github.io/TwitchInfo",
   "name": "twitch-info",
-  "version": "2.6.5",
+  "version": "2.7.0",
   "private": true,
   "description": "Getting Twitch account information",
   "author": "xrystalll",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xrystalll/TwitchInfo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xrystalll/TwitchInfo/issues"
+  },
+  "license": "Apache-2.0",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -13,7 +22,7 @@
     "react-dom": "^16.13.1",
     "react-dropdown": "^1.7.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { rootPath } from 'config';
 import ChannelRoute from 'components/support/ChannelRoute';
 import Home from 'components/home';
 import Channel from 'components/channel';
@@ -17,8 +18,8 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <ChannelRoute path="/channel/:login" component={Channel} />
+          <Route path={rootPath} exact component={Home} />
+          <ChannelRoute path={rootPath + 'channel/:login'} component={Channel} />
           <Route component={NotFound} />
         </Switch>
       </Router>

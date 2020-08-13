@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { clientId } from 'config';
 import ClipItem from '../partials/ClipItem';
 import { Loader } from '../partials/Loader';
 import { Error } from '../partials/Error';
@@ -6,12 +7,11 @@ import Dropdown from 'react-dropdown';
 
 class Clips extends Component {
   _isMounted = false;
-  initialPeriod = 'week'
+  initialPeriod = 'week'; // day, week, month, all
   constructor(props) {
     super();
     this.state = {
       login: props.login,
-      clientId: props.clientId,
       period: this.initialPeriod,
       clips: [],
       noClipsData: false,
@@ -46,7 +46,7 @@ class Clips extends Component {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.twitchtv.v5+json',
-          'Client-ID': this.state.clientId
+          'Client-ID': clientId
         }
       })
       const res = await data.json()
@@ -72,16 +72,13 @@ class Clips extends Component {
       method: 'GET',
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': this.state.clientId
+        'Client-ID': clientId
       }
     })
       .then(response => response.json())
       .then(data => {
         if (data.clips.length > 0 && this.state.cursor !== '') {
           this.setState({ clips: [...this.state.clips, ...data.clips], cursor: data._cursor, loadMoreInProgress: false })
-          if (data._cursor === '') {
-            this.setState({ loadMore: false, loadMoreInProgress: false })
-          }
         } else {
           this.setState({ loadMore: false, loadMoreInProgress: false })
         }
@@ -153,7 +150,7 @@ class Clips extends Component {
         {clips.length > 0 ? (
           <div className="clips_list">
             {clips.map((item, index) => (
-              <ClipItem key={index} data={item} clientId={this.state.clientId} />
+              <ClipItem key={index} data={item} />
             ))}
           </div>
         ) : (

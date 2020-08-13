@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { rootPath } from 'config';
 import { ThemeToggle } from '../partials/ThemeToggle';
 
 const Home = () => {
@@ -13,7 +14,7 @@ const Home = () => {
   const getUser = (e) => {
     const input = e.currentTarget.parentNode.children[0]
     if (input.value.trim().length) {
-      history.push('/channel/' + input.value.trim().toLowerCase())
+      history.push(rootPath + 'channel/' + input.value.trim().toLowerCase())
       if (error === false) return
 
       setError(false)
@@ -26,7 +27,7 @@ const Home = () => {
     if (e.key === 'Enter') {
       const input = e.currentTarget
       if (input.value.trim().length) {
-        history.push('/channel/' + input.value.trim().toLowerCase())
+        history.push(rootPath + 'channel/' + input.value.trim().toLowerCase())
         if (error === false) return
 
         setError(false)

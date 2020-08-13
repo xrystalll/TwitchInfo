@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { clientId } from 'config';
 import { StreamItem } from '../partials/StreamItem';
 import { Loader } from '../partials/Loader';
 import { Error } from '../partials/Error';
@@ -6,12 +7,11 @@ import Dropdown from 'react-dropdown';
 
 class Videos extends Component {
   _isMounted = false;
-  initialType = 'archive'
+  initialType = 'archive'; // archive, highlight, upload
   constructor(props) {
     super();
     this.state = {
       userId: props.userId,
-      clientId: props.clientId,
       type: this.initialType,
       videos: [],
       noVideosData: false,
@@ -37,7 +37,7 @@ class Videos extends Component {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.twitchtv.v5+json',
-          'Client-ID': this.state.clientId
+          'Client-ID': clientId
         }
       })
       const res = await data.json()
@@ -64,7 +64,7 @@ class Videos extends Component {
       method: 'GET',
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': this.state.clientId
+        'Client-ID': clientId
       }
     })
       .then(response => response.json())

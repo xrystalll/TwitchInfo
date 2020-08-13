@@ -27,7 +27,6 @@
   --default-transparent-08: rgba(0, 0, 0, .8);
   --secondary-transparent-02: rgba(173, 173, 184, .2);
   --secondary-transparent-04: rgba(173, 173, 184, .4);
-  --invert: 0;
 }
 .light-theme {
   --main-bg: #e0e0e0;
@@ -45,7 +44,6 @@
   --dark-monochrome: #000;
   --secondary-transparent-02: rgba(255, 255, 255, .2);
   --secondary-transparent-04: rgba(18, 18, 18, .4);
-  --invert: 1;
 }
 * {
   outline: none;
@@ -949,14 +947,13 @@ i.live_dot {
 
 .Dropdown-option.is-selected:before {
   content: '';
-  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" version="1.1" viewBox="0 0 20 20" x="0px" y="0px"%3E%3Cpath d="M4 10l5 5 8-8-1.5-1.5L9 12 5.5 8.5 4 10z" fill="%23efeff1"%3E%3C/path%3E%3C/svg%3E');
-  background-repeat: no-repeat;
+  background: var(--main-control-color);
+  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" version="1.1" viewBox="0 0 20 20" x="0px" y="0px"%3E%3Cpath d="M4 10l5 5 8-8-1.5-1.5L9 12 5.5 8.5 4 10z"%3E%3C/path%3E%3C/svg%3E');
   position: absolute;
   top: 11px;
   right: 13px;
   width: 18px;
   height: 18px;
-  filter: invert(var(--invert));
 }
 
 .Dropdown-noresults {

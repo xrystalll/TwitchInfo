@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { clientId } from 'config';
 import { ClipModal } from '../partials/ClipModal';
 
 class Clip extends Component {
@@ -6,8 +7,7 @@ class Clip extends Component {
   constructor(props) {
     super();
     this.state = {
-      clip: [],
-      clientId: props.clientId,
+      clip: []
     }
   }
 
@@ -32,7 +32,7 @@ class Clip extends Component {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.twitchtv.v5+json',
-          'Client-ID': this.state.clientId
+          'Client-ID': clientId
         }
       })
       const res = await data.json()

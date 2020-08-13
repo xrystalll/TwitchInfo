@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { rootPath } from 'config';
 import { timeFormat } from '../support/Utils';
 
 export const FollowItem = (props) => {
   const data = props.data.channel
 
   return (
-    <Link to={'/channel/' + data.name} className="follow_item">
+    <Link to={rootPath + 'channel/' + data.name} className="follow_item">
       <div className="follow_item_left">
         <div className="follow_img" style={{ 'backgroundImage': `url(${data.logo})` }} />
       </div>

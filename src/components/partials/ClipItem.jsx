@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { rootPath } from 'config';
 import Clip from '../clip';
 import { timeFormat, counter, toHHMMSS } from '../support/Utils';
 
@@ -88,7 +89,7 @@ class ClipItem extends Component {
 
     return (
       <>
-        {open && <Clip slug={slug} clientId={this.props.clientId} />}
+        {open && <Clip slug={slug} />}
 
         <div className="clip_item" data-slug={data.slug}>
           <div onClick={this.openModal.bind(this, data.slug)}>
@@ -107,7 +108,7 @@ class ClipItem extends Component {
             {!!data.curator && (
               <div className="clip_author">
                 Clipped by
-                <Link to={'/channel/' + data.curator.name}>{data.curator.display_name}</Link>
+                <Link to={rootPath + 'channel/' + data.curator.name}>{data.curator.display_name}</Link>
               </div>
             )}
             <h4 className="clip_title">{data.title}</h4>

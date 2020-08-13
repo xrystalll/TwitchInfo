@@ -1,4 +1,5 @@
 import React from 'react';
+import { rootPath } from 'config';
 import { Link } from 'react-router-dom';
 
 export const NotFound = () => {
@@ -9,7 +10,7 @@ export const NotFound = () => {
       <div className="container http_error_container">
         <div className="http_error">
           <h2>404 Not Found</h2>
-          <Link to="/">Go to home page</Link>
+          <Link to={rootPath}>Go to home page</Link>
         </div>
       </div>
     </section>

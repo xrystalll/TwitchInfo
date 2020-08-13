@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { rootPath } from 'config';
 import { timeFormat, counter } from '../support/Utils';
 
 export const ClipModal = ({ data }) => {
@@ -16,7 +17,7 @@ export const ClipModal = ({ data }) => {
       .catch(err => console.error('Could not copy text.', err))
   }
 
-  const clipRatio = '16-9'
+  const clipRatio = '16-9' // 1-1, 16-9, 4-3, 3-2
   const isCopied = copied ? ' copied_noactive' : ''
   const vodExist = !!data.vod
 
@@ -103,7 +104,7 @@ export const ClipModal = ({ data }) => {
                                 {!!data.curator && (
                                   <div className="clip_info_author">
                                     Clipped by
-                                    <Link to={'/channel/' + data.curator.name}>{data.curator.display_name}</Link>
+                                    <Link to={rootPath + 'channel/' + data.curator.name}>{data.curator.display_name}</Link>
                                   </div>
                                 )}
                               </div>

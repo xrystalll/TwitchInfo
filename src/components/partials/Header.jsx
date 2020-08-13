@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { rootPath } from 'config';
 
 const Header = () => {
   const history = useHistory()
@@ -11,7 +12,7 @@ const Header = () => {
   const getUser = (e) => {
     const input = e.currentTarget.parentNode.children[0]
     if (input.value.trim().length) {
-      history.push('/channel/' + input.value.trim().toLowerCase())
+      history.push(rootPath + 'channel/' + input.value.trim().toLowerCase())
       input.value = ''
       if (error === false) return
 
@@ -25,7 +26,7 @@ const Header = () => {
     if (e.key === 'Enter') {
       const input = e.currentTarget
       if (input.value.trim().length) {
-        history.push('/channel/' + input.value.trim().toLowerCase())
+        history.push(rootPath + 'channel/' + input.value.trim().toLowerCase())
         input.value = ''
         if (error === false) return
 
@@ -56,7 +57,7 @@ const Header = () => {
   return (
     <header>
       <div className="head_container">
-        <Link to="/" className="twitch_link">
+        <Link to={rootPath} className="twitch_link">
           <svg className="tw-glitch-logo__svg" overflow="visible" width="40px" height="40px" version="1.1" viewBox="0 0 40 40" x="0px" y="0px">
             <polygon className="tw-glitch-logo__body" points="13 8 8 13 8 31 14 31 14 36 19 31 23 31 32 22 32 8" />
             <polygon className="tw-glitch-logo__face" points="26 25 30 21 30 10 14 10 14 25 18 25 18 29 22 25" transform="translate(0 0)" />

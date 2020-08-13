@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { clientId } from 'config';
 import { Profile } from '../partials/Profile';
 import { StreamItem } from '../partials/StreamItem';
 import { Navigation } from '../partials/Navigation';
@@ -10,7 +11,6 @@ class Channel extends Component {
     super();
     this.initialState = {
       userId: 0,
-      clientId: 'ce4n64ldb15801hbrrz06vpq5dbain',
       profile: [],
       extendedInfo: [],
       stream: {},
@@ -38,7 +38,7 @@ class Channel extends Component {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.twitchtv.v5+json',
-          'Client-ID': this.state.clientId
+          'Client-ID': clientId
         }
       })
       const profile = await data.json()
@@ -61,7 +61,7 @@ class Channel extends Component {
       method: 'GET',
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': this.state.clientId
+        'Client-ID': clientId
       }
     })
       .then(response => response.json())
@@ -79,7 +79,7 @@ class Channel extends Component {
       method: 'GET',
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': this.state.clientId
+        'Client-ID': clientId
       }
     })
       .then(response => response.json())
@@ -121,7 +121,7 @@ class Channel extends Component {
 
     return (
       profile.length > 0 ? (
-        <div>
+        <React.Fragment>
           <Profile data={profile} extended={extendedInfo} />
           {live && (
             <div className="stream_container">
@@ -130,11 +130,10 @@ class Channel extends Component {
             </div>
           )}
           <Navigation data={{
-            clientId: this.state.clientId,
             userId: profile[0]._id,
             login: profile[0].name
           }} />
-        </div>
+        </React.Fragment>
       ) : (
         !noProfileData ? <Loader className="full" size="32" /> : <Error message="Nothing! Try another username" className="full" />
       )
