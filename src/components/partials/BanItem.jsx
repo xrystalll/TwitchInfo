@@ -2,8 +2,8 @@ import React from 'react';
 import { timeFormat, convertMiliseconds, declOfNum } from '../support/Utils';
 
 export const BanItem = ({ data }) => {
-  const duration = convertMiliseconds(new Date(data.updated_at) - new Date(data.created_at), 'd')
-  const durationHours = convertMiliseconds(new Date(data.updated_at) - new Date(data.created_at), 'h')
+  const duration = convertMiliseconds(new Date(data.ended_at) - new Date(data.created_at), 'd')
+  const durationHours = convertMiliseconds(new Date(data.ended_at) - new Date(data.created_at), 'h')
 
   return (
     <div className="ban_row">
@@ -14,7 +14,7 @@ export const BanItem = ({ data }) => {
         }
       </div>
       <div>{timeFormat(data.created_at)}</div>
-      <div>{timeFormat(data.updated_at)}</div>
+      <div>{timeFormat(data.ended_at)}</div>
     </div>
   )
 }

@@ -25,7 +25,7 @@ class Bans extends Component {
 
   async fetchBans() {
     try {
-      const data = await fetch('https://api.streamerbans.com/api/v1/users/' + this.state.login)
+      const data = await fetch('https://staging.streamerbans.com/api/twitch/compatibility/user/' + this.state.login)
       const res = await data.json()
 
       if (!this._isMounted) return
