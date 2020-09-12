@@ -480,6 +480,13 @@ article.container-profile-main {
   margin: 0 auto;
 }
 
+.user-profile-content .user-head div.user-info .banned {
+  font-weight: 600;
+  font-size: 26px !important;
+  color: var(--main-danger-color) !important;
+  text-shadow: 0 0 8px var(--default-transparent-08);
+}
+
 .user-profile-content .user-posts {
   width: 100%;
 }
@@ -1477,6 +1484,9 @@ i.live_dot {
   }
   .user-profile-content .social_info li {
     margin: 0;
+  }
+  .user-profile-content .social_info.single li {
+    width: initial;
   }
   .clips_list {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

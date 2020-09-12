@@ -5,6 +5,7 @@ export const Profile = (props) => {
   const data = props.data[0]
   const extended = props.extended[0]
   const beforeBg = `.user-profile-content .user-head:before {background-image: url(${data.profile_banner || data.logo})}`
+  const banned = data.banned || false
 
   return (
     <article className="container container-profile container-profile-main">
@@ -37,18 +38,18 @@ export const Profile = (props) => {
                   )}
                 </a>
               </div>
-              <ul className="social_info animated fadeInUpBig">
+              <ul className={`social_info${!data.views ? ' single' : ''} animated fadeInUpBig`}>
                 <li>
                   <span>Followers</span>
                   <span className="social_count">{counter(data.followers)}</span>
                 </li>
                 <li>
-                  <span>Views</span>
-                  <span className="social_count">{counter(data.views)}</span>
+                  <span>{data.views && 'Views'}</span>
+                  <span className="social_count">{data.views && counter(data.views)}</span>
                 </li>
               </ul>
               {data.description.length > 0 && (
-                <p className="bio animated fadeInUpBig">{data.description}</p>
+                <p className={`bio${banned ? ' banned' : ''} animated fadeInUpBig`}>{data.description}</p>
               )}
             </div>
           </div>
@@ -60,10 +61,12 @@ export const Profile = (props) => {
               <span>Last seen:</span>
               <b>{timeFormat(data.updated_at)}</b>
             </div>
-            <div className="more_info">
-              <span>Registration:</span>
-              <b>{timeFormat(data.created_at)}</b>
-            </div>
+            {data.created_at && (
+              <div className="more_info">
+                <span>Registration:</span>
+                <b>{timeFormat(data.created_at)}</b>
+              </div>
+            )}
           </div>
         </div>
       </div>

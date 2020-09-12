@@ -48,7 +48,7 @@ class Channel extends Component {
         this.getChannel()
         this.getStream()
       } else {
-        this.setState({ noProfileData: true })
+        this.getIfNotExist()
       }
     } catch(e) {
       this.setState({ noProfileData: true })
@@ -113,6 +113,33 @@ class Channel extends Component {
         if (this.state.live === false) return
 
         this.setState({ live: false })
+      })
+  }
+
+  getIfNotExist() {
+    fetch('https://staging.streamerbans.com/api/twitch/compatibility/user/' + this.props.match.params.login.toLowerCase())
+      .then(response => response.json())
+      .then(data => {
+        const res = data.data
+        this.setState({
+          profile: [{
+            _id: res.channel_id,
+            name: res.login_name,
+            display_name: res.display_name,
+            logo: res.profile_image_url,
+            partner: res.is_partner,
+            followers: res.followers,
+            views: null,
+            description: res.is_banned ? 'Channel is banned!' : '',
+            updated_at: res.updated_at,
+            created_at: null,
+            banned: res.is_banned
+          }]
+        })
+      })
+      .catch(e => {
+        this.setState({ noProfileData: true })
+        console.error(e)
       })
   }
 
