@@ -92,7 +92,7 @@ class ClipItem extends Component {
         {open && <Clip slug={slug} />}
 
         <div className="clip_item" data-slug={data.slug}>
-          <div onClick={this.openModal.bind(this, data.slug)}>
+          <div className="clip" onClick={this.openModal.bind(this, data.slug)}>
             <div className="clip_thumb" style={{ 'backgroundImage': `url(${data.thumbnails.medium})` }}>
               <div className="clip_stat">
                 <span>{counter(data.views)} views</span>

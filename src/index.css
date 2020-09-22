@@ -193,7 +193,7 @@ header {
   border-radius: 8px;
 }
 
-.tw-glitch-logo__svg:hover {
+.tw-glitch-logo__svg:focus {
   background-color: var(--secondary-transparent-01);
 }
 
@@ -221,8 +221,12 @@ header {
   transition: all .2s ease-in;
 }
 
-.input_text:focus {
+.input_text:hover {
   background-color: var(--main-bg);
+  border-color: var(--accent-color);
+}
+
+.input_text:focus {
   border-color: var(--accent-color);
 }
 
@@ -260,6 +264,10 @@ header {
 
 .btn:hover, .btn_main:hover {
   background-color: var(--main-control-pressed);
+}
+
+.btn:focus, .btn_main:focus {
+  background-color: var(--secondary-tint);
 }
 
 main .input_text, main .btn_main {
@@ -432,7 +440,12 @@ article.container-profile-main {
   text-decoration: none;
   color: inherit;
   display: flex;
+  border-radius: 8px;
   align-items: center;
+}
+
+.user-profile-content .user-head div.user-info .uname .display_name:focus {
+  background-color: var(--secondary-transparent-02);
 }
 
 .user-profile-content .user-head div.user-info .uname .display_name div {
@@ -551,7 +564,7 @@ article.container-profile-main {
   overflow: hidden;
 }
 
-.stream_item:hover {
+.stream_item:hover, .stream_item:focus {
   background-color: var(--secondary-bg-hover);
 }
 
@@ -607,7 +620,7 @@ i.live_dot {
   transition: background .2s ease-in;
 }
 
-.nav_item:hover::before {
+.nav_item:hover::before, .nav_item:focus::before {
   background-color: var(--secondary-transparent-01);
 }
 
@@ -615,6 +628,10 @@ i.live_dot {
   color: var(--accent-color);
   border-bottom: 2px solid;
   pointer-events: none;
+}
+
+.nav_item.active:hover::before, .nav_item.active:focus::before {
+  background-color: initial;
 }
 
 .nav_item:last-of-type {
@@ -641,7 +658,7 @@ i.live_dot {
   line-height: 1.6;
 }
 
-.follow_item:hover {
+.follow_item:hover, .follow_item:focus {
   background-color: var(--secondary-transparent-01);
 }
 
@@ -718,8 +735,10 @@ i.live_dot {
   width: initial;
   min-width: 200px;
   height: 36px;
+  border: none;
   border-radius: 8px;
   padding: 0 16px;
+  font-size: 15px;
   font-weight: 500;
   white-space: nowrap;
   display: flex;
@@ -736,6 +755,10 @@ i.live_dot {
 .load_more:hover {
   background-color: var(--accent-color);
   box-shadow: var(--default-transparent-02) 0 2px 6px;
+}
+
+.load_more:focus {
+  background-color: var(--secondary-sub-bg);
 }
 
 .more_text, .more_loader {
@@ -773,12 +796,20 @@ i.live_dot {
   overflow: hidden;
 }
 
-.clip_item:hover {
+.clip_item:hover, .clip_item:focus {
   background-color: var(--secondary-bg-hover);
+}
+
+.clip_item a, .stream_item a {
+  height: 100%;
 }
 
 .clip_item a, .stream_item a, .clip_bottom a {
   color: var(--main-control-color);
+}
+
+.clip_item a:focus, .stream_item a:focus {
+  background-color: var(--secondary-bg-hover);
 }
 
 .clip_header {
@@ -825,7 +856,7 @@ i.live_dot {
   padding: 1px 4px;
 }
 
-.clip_author a:hover {
+.clip_author a:hover, .clip_author a:focus {
   background-color: var(--secondary-transparent-01);
 }
 
@@ -896,7 +927,7 @@ i.live_dot {
   justify-content: center;
   align-items: center;
   padding: 0;
-  height: 36px;
+  height: 36px !important;
   width: 100%;
 }
 
@@ -1304,7 +1335,7 @@ i.live_dot {
   padding: 1px 4px;
 }
 
-.bottom .clip_info_author a:hover {
+.bottom .clip_info_author a:hover, .bottom .clip_info_author a:focus {
   background-color: var(--secondary-transparent-01);
 }
 
@@ -1375,7 +1406,7 @@ i.live_dot {
   transition: background .2s ease-in;
 }
 
-.clip_action_share:hover::before {
+.clip_action_share:hover::before, .clip_action_share:focus::before {
   background-color: var(--secondary-transparent-01);
 }
 
@@ -1499,7 +1530,7 @@ i.live_dot {
   text-underline-position: under;
 }
 
-.api_copy a:hover {
+.api_copy a:hover, .api_copy a:focus {
   background-color: var(--secondary-transparent-01);
   text-decoration: initial;
 }
@@ -1685,14 +1716,17 @@ i.live_dot {
   align-items: center;
   padding: 4px 8px;
   margin: 12px 8px 12px auto;
+  background: none;
   border-radius: 8px;
+  border: none;
+  font-size: 15px;
   width: max-content;
   cursor: pointer;
   user-select: none;
 }
 
-.theme_toggle:hover {
-  background-color: var(--secondary-transparent-01);
+.theme_toggle:hover, .theme_toggle:focus {
+  background-color: var(--secondary-transparent-02);
 }
 
 .theme_toggle svg path {

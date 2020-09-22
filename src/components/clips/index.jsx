@@ -158,13 +158,13 @@ class Clips extends Component {
         )}
         {loadMore && (
           <div className="foot_center">
-            <div onClick={this.loadMoreClips.bind(this)} className="load_more">
+            <button onClick={this.loadMoreClips.bind(this)} className="load_more">
               {loadMoreInProgress ? (
                 <span className="more_loader">
                   <Loader />
                 </span>
               ) : <span className="more_text">Load more clips</span>}
-            </div>
+            </button>
           </div>
         )}
       </>

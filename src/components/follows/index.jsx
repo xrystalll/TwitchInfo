@@ -106,13 +106,13 @@ class Follows extends Component {
         )}
         {loadMore && (
           <div className="foot_center">
-            <div onClick={this.loadMoreFollows.bind(this)} className="load_more">
+            <button onClick={this.loadMoreFollows.bind(this)} className="load_more">
               {loadMoreInProgress ? (
                 <span className="more_loader">
                   <Loader />
                 </span>
               ) : <span className="more_text">Load more follows</span>}
-            </div>
+            </button>
           </div>
         )}
       </>
