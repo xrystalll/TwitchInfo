@@ -151,7 +151,7 @@ class Channel extends Component {
         <React.Fragment>
           <Profile data={profile} extended={extendedInfo} />
           {live && (
-            <div className="stream_container">
+            <div className="stream_container stream">
               <div className="live_title">Live stream</div>
               <StreamItem data={stream} />
             </div>

@@ -134,7 +134,7 @@ class Videos extends Component {
           </div>
         </div>
         {videos.length > 0 ? (
-          <div className="clips_list">
+          <div className="stream clips_list">
             {videos.map(item => (
               <StreamItem key={item._id} data={{
                 live: false,

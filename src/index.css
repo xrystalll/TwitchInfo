@@ -193,7 +193,7 @@ header {
   border-radius: 8px;
 }
 
-.tw-glitch-logo__svg:focus {
+.twitch_link:focus .tw-glitch-logo__svg {
   background-color: var(--secondary-transparent-01);
 }
 
@@ -221,13 +221,12 @@ header {
   transition: all .2s ease-in;
 }
 
-.input_text:hover {
-  background-color: var(--main-bg);
+.input_text:hover, .input_text:focus {
   border-color: var(--accent-color);
 }
 
-.input_text:focus {
-  border-color: var(--accent-color);
+.input_text:focus-within {
+  background-color: var(--main-bg);
 }
 
 .input_text.error {
@@ -796,7 +795,7 @@ i.live_dot {
   overflow: hidden;
 }
 
-.clip_item:hover, .clip_item:focus {
+.stream .clip_item:hover, .stream .clip_item:focus {
   background-color: var(--secondary-bg-hover);
 }
 
@@ -806,10 +805,6 @@ i.live_dot {
 
 .clip_item a, .stream_item a, .clip_bottom a {
   color: var(--main-control-color);
-}
-
-.clip_item a:focus, .stream_item a:focus {
-  background-color: var(--secondary-bg-hover);
 }
 
 .clip_header {
