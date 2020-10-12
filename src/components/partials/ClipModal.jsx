@@ -24,13 +24,13 @@ export const ClipModal = ({ data }) => {
   return (
     <div className="modal open">
       <div className="position">
-        <div className="body">
+        <div className="body" aria-modal="true">
 
-          <div className="prev_btn clip_actions prev_clip">
+          <button className="prev_btn clip_actions modal_btn prev_clip">
             <svg className="prev_btn clip_action_ic" width="20" height="20" version="1.1" viewBox="0 0 20 20" x="0px" y="0px">
               <path className="prev_btn" d="M13.5 14.5L9 10l4.5-4.5L12 4l-6 6 6 6 1.5-1.5z" />
             </svg>
-          </div>
+          </button>
 
           <div className="body_flex">
             <div className={'body_width body_ratio_' + clipRatio}>
@@ -141,17 +141,17 @@ export const ClipModal = ({ data }) => {
           </div>
 
           <div className="clip_actions">
-            <div className="close_btn close_clip" title="Press Esc key to close">
+            <button className="close_btn modal_btn close_clip" title="Press Esc key to close">
               <svg className="close_btn clip_action_ic" width="20" height="20" version="1.1" viewBox="0 0 20 20" x="0px" y="0px">
                 <path className="close_btn" d="M8.5 10L4 5.5 5.5 4 10 8.5 14.5 4 16 5.5 11.5 10l4.5 4.5-1.5 1.5-4.5-4.5L5.5 16 4 14.5 8.5 10z" />
               </svg>
-            </div>
+            </button>
 
-            <div className="next_btn next_clip">
+            <button className="next_btn modal_btn next_clip">
               <svg className="next_btn clip_action_ic" width="20" height="20" version="1.1" viewBox="0 0 20 20" x="0px" y="0px">
                 <path className="next_btn" d="M6.5 5.5L11 10l-4.5 4.5L8 16l6-6-6-6-1.5 1.5z" />
               </svg>
-            </div>
+            </button>
           </div>
 
         </div>
