@@ -148,7 +148,11 @@ class Videos extends Component {
                 game: item.game,
                 created_at: item.created_at,
                 title: item.title,
-                duration: item.length
+                duration: item.length,
+                channel: {
+                  logo: item.channel.logo,
+                  display_name: item.channel.display_name
+                }
               }} />
             ))}
           </div>

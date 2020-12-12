@@ -1,7 +1,7 @@
 {
   "homepage": "https://xrystalll.github.io/TwitchInfo",
   "name": "twitch-info",
-  "version": "2.8.3",
+  "version": "3.0.0",
   "private": true,
   "description": "Getting Twitch account information",
   "author": "xrystalll",
@@ -13,23 +13,27 @@
     "url": "https://github.com/xrystalll/TwitchInfo/issues"
   },
   "license": "Apache-2.0",
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.13.1",
-    "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.13.1",
-    "react-dropdown": "^1.9.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
+  },
+  "dependencies": {
+    "react": "^16.14.0",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^16.14.0",
+    "react-dropdown": "^1.9.0",
+    "react-player": "^2.7.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "gh-pages": "^2.2.0",
+    "react-scripts": "^3.4.4"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,8 +49,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^2.2.0"
   }
 }

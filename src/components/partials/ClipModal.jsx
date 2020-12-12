@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 import { rootPath } from 'config';
 import { timeFormat, counter } from '../support/Utils';
 
@@ -39,11 +40,12 @@ export const ClipModal = ({ data }) => {
                 <div className="top">
                   <div className={'view_ratio ratio_' + clipRatio}>
                     <div className="view_content">
-                      <video
+                      <ReactPlayer
                         className="video"
-                        src={data.thumbnails.tiny.replace('-preview-86x45.jpg', '.mp4')}
-                        poster={data.thumbnails.medium}
+                        url={data.thumbnails.tiny.replace('-preview-86x45.jpg', '.mp4')}
+                        light={data.thumbnails.medium}
                         controls
+                        playing
                       />
                     </div>
                   </div>

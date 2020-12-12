@@ -582,6 +582,10 @@ article.container-profile-main {
   align-items: center;
 }
 
+.live span {
+  margin-left: 8px;
+}
+
 i.live_dot {
   background-color: var(--main-danger-color);
   border-radius: 50%;

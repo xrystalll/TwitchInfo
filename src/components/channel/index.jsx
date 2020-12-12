@@ -98,7 +98,11 @@ class Channel extends Component {
               game: data.stream.game,
               created_at: data.stream.created_at,
               title: data.stream.channel.status,
-              duration: 0
+              duration: 0,
+              channel: {
+                logo: data.stream.channel.logo,
+                display_name: data.stream.channel.display_name
+              }
             },
             live: true
           })
