@@ -139,6 +139,7 @@ class Videos extends Component {
               <StreamItem key={item._id} data={{
                 live: false,
                 url: item.url,
+                _id: item._id,
                 preview: {
                   large: item.preview.large,
                   medium: item.preview.medium,

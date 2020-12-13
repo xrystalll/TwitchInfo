@@ -18,7 +18,9 @@ export const ClipModal = ({ data }) => {
       .catch(err => console.error('Could not copy text.', err))
   }
 
-  const clipRatio = '16-9' // 1-1, 16-9, 4-3, 3-2
+  const ratioList = ['1-1', '16-9', '4-3', '3-2']
+  const [ratio, setRatio] = useState(1) // ratioList value index
+
   const isCopied = copied ? ' copied_noactive' : ''
   const vodExist = !!data.vod
 
@@ -34,15 +36,17 @@ export const ClipModal = ({ data }) => {
           </button>
 
           <div className="body_flex">
-            <div className={'body_width body_ratio_' + clipRatio}>
+            <div className={'body_width body_ratio_' + ratioList[ratio] }>
               <div className="body_bg">
 
                 <div className="top">
-                  <div className={'view_ratio ratio_' + clipRatio}>
+                  <div className={'view_ratio ratio_' + ratioList[ratio]}>
                     <div className="view_content">
                       <ReactPlayer
                         className="video"
                         url={data.thumbnails.tiny.replace('-preview-86x45.jpg', '.mp4')}
+                        width="100%"
+                        height="100%"
                         light={data.thumbnails.medium}
                         controls
                         playing

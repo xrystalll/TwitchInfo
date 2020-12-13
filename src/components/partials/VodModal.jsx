@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import { timeFormat, counter } from '../support/Utils';
 
 export const VodModal = ({ data }) => {
-  const vodRatio = '16-9' // 1-1, 16-9, 4-3, 3-2
+  const [error, setError] = useState(false)
+
+  const ratioList = ['1-1', '16-9', '4-3', '3-2']
+  const [ratio, setRatio] = useState(1) // ratioList value index
+
   const vodId = data.preview.large.split('/')[5]
   const vodUrl = 'https://twitch-cors.herokuapp.com/https://vod-secure.twitch.tv/' + vodId + '/chunked/index-dvr.m3u8'
+  const frameVid = data.live ? '?channel=' + data.channel.display_name : '?video=' + data._id
+
+  const errorHandler = (message, e) => {
+    const errorCodes = [400, 401, 403, 404, 500]
+    if (errorCodes.includes(e?.response?.code)) {
+      setError(true)
+    }
+  }
 
   return (
     <div className="modal open">
@@ -13,19 +25,35 @@ export const VodModal = ({ data }) => {
         <div className="body" aria-modal="true">
 
           <div className="body_flex">
-            <div className={'body_width body_ratio_' + vodRatio}>
+            <div className={'body_width body_ratio_' + ratioList[ratio]}>
               <div className="body_bg">
 
                 <div className="top">
-                  <div className={'view_ratio ratio_' + vodRatio}>
+                  <div className={'view_ratio ratio_' + ratioList[ratio]}>
                     <div className="view_content">
-                      <ReactPlayer
-                        className="video"
-                        url={vodUrl}
-                        light={data.preview.medium}
-                        controls
-                        playing
-                      />
+                      {!error ? (
+                        <ReactPlayer
+                          className="video"
+                          url={vodUrl}
+                          width="100%"
+                          height="100%"
+                          light={data.preview.large}
+                          controls
+                          playing
+                          onError={errorHandler}
+                        />
+                      ) : (
+                        <iframe
+                          title="TwitchPlayer"
+                          className="video"
+                          src={`https://player.twitch.tv/${frameVid}&parent=` + document.location.hostname}
+                          width="100%"
+                          height="100%"
+                          frameBorder="0"
+                          scrolling="no"
+                          allowFullScreen={true}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>

@@ -89,6 +89,7 @@ class Channel extends Component {
             stream: {
               live: true,
               url: data.stream.channel.url,
+              _id: data.stream._id,
               preview: {
                 large: data.stream.preview.large,
                 medium: data.stream.preview.medium,
