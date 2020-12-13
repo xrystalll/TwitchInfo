@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/TwitchInfo/static/css/main.d88febe5.chunk.css",
-    "main.js": "/TwitchInfo/static/js/main.275bad00.chunk.js",
-    "main.js.map": "/TwitchInfo/static/js/main.275bad00.chunk.js.map",
+    "main.js": "/TwitchInfo/static/js/main.8f5273ea.chunk.js",
+    "main.js.map": "/TwitchInfo/static/js/main.8f5273ea.chunk.js.map",
     "runtime-main.js": "/TwitchInfo/static/js/runtime-main.fd725c35.js",
     "runtime-main.js.map": "/TwitchInfo/static/js/runtime-main.fd725c35.js.map",
-    "static/js/2.543c8eec.chunk.js": "/TwitchInfo/static/js/2.543c8eec.chunk.js",
-    "static/js/2.543c8eec.chunk.js.map": "/TwitchInfo/static/js/2.543c8eec.chunk.js.map",
+    "static/js/2.6a0735da.chunk.js": "/TwitchInfo/static/js/2.6a0735da.chunk.js",
+    "static/js/2.6a0735da.chunk.js.map": "/TwitchInfo/static/js/2.6a0735da.chunk.js.map",
     "index.html": "/TwitchInfo/index.html",
-    "precache-manifest.8ac6474733f2bc7c2e23e26170ef324f.js": "/TwitchInfo/precache-manifest.8ac6474733f2bc7c2e23e26170ef324f.js",
+    "precache-manifest.dd1fbed2f3fe2b8c3c4ed4f5ae443d8d.js": "/TwitchInfo/precache-manifest.dd1fbed2f3fe2b8c3c4ed4f5ae443d8d.js",
     "service-worker.js": "/TwitchInfo/service-worker.js",
     "static/css/main.d88febe5.chunk.css.map": "/TwitchInfo/static/css/main.d88febe5.chunk.css.map",
-    "static/js/2.543c8eec.chunk.js.LICENSE.txt": "/TwitchInfo/static/js/2.543c8eec.chunk.js.LICENSE.txt",
+    "static/js/2.6a0735da.chunk.js.LICENSE.txt": "/TwitchInfo/static/js/2.6a0735da.chunk.js.LICENSE.txt",
     "static/media/index.css": "/TwitchInfo/static/media/twitch-background.a26a488a.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.fd725c35.js",
-    "static/js/2.543c8eec.chunk.js",
+    "static/js/2.6a0735da.chunk.js",
     "static/css/main.d88febe5.chunk.css",
-    "static/js/main.275bad00.chunk.js"
+    "static/js/main.8f5273ea.chunk.js"
   ]
 }
